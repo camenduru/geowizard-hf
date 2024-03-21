@@ -403,11 +403,19 @@ def run_demo_server(pipe):
 
 def main():
 
-    from diffusers import DiffusionPipeline
-    pipeline = DiffusionPipeline.from_pretrained("lemonaddie/Geowizard")
+    REPO_URL = "https://github.com/lemonaddie/geowizard.git"
+    CHECKPOINT = "lemonaddie/Geowizard"
+
+    repo = git.Repo.clone_from(REPO_URL)
+    sys.path.append(os.path.join(os.getcwd()))
+    
+    from models.depth_normal_pipeline_clip_cfg import DepthNormalEstimationPipeline
+    pipeline = DepthNormalEstimationPipeline.from_pretrained("lemonaddie/Geowizard")
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+    print(1)
+    
     pipe = pipeline.from_pretrained(CHECKPOINT)
     try:
         import xformers
