@@ -7,7 +7,6 @@ numpy == 1.23.1
 Pillow
 h5py
 matplotlib
-pickle
 scikit-image==0.22.0
 gradio == 3.32.0
 tqdm == 4.65.0
