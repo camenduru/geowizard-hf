@@ -3,7 +3,6 @@ import os
 import shutil
 import sys
 
-import git
 import gradio as gr
 import numpy as np
 import torch as torch
