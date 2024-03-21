@@ -6,7 +6,6 @@ opencv-python
 numpy == 1.23.1
 Pillow
 h5py
-json
 matplotlib
 pickle
 scikit-image==0.22.0
