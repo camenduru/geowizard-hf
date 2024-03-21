@@ -403,15 +403,10 @@ def run_demo_server(pipe):
 
 def main():
 
-    if os.path.isdir(REPO_DIR):
-        shutil.rmtree(REPO_DIR)
-    repo = git.Repo.clone_from(REPO_URL, REPO_DIR)
-    repo.git.checkout(REPO_HASH)
-
     sys.path.append(os.path.join(os.getcwd(), REPO_DIR))
 
     from diffusers import DiffusionPipeline
-    pipeline = DiffusionPipeline.from_pretrained("JUGGHM/temp_repo")
+    pipeline = DiffusionPipeline.from_pretrained("lemonaddie/Geowizard")
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
