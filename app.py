@@ -406,7 +406,7 @@ def main():
 
     REPO_URL = "https://github.com/lemonaddie/geowizard.git"
     CHECKPOINT = "lemonaddie/Geowizard"
-    REPO_DIR = "Geowizard"
+    REPO_DIR = "pipeline"
 
     if os.path.isdir(REPO_DIR):
         shutil.rmtree(REPO_DIR)
@@ -435,4 +435,3 @@ def main():
 if __name__ == "__main__":
     main()
 #1
-#2
