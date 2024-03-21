@@ -60,35 +60,6 @@ def process(
         [path_out_16bit, path_out_fp32, path_out_vis],
     )
 
-
-def process_3d(
-    input_image,
-    files,
-    size_longest_px,
-    size_longest_cm,
-    filter_size,
-    plane_near,
-    plane_far,
-    embossing,
-    frame_thickness,
-    frame_near,
-    frame_far,
-):
-    if input_image is None or len(files) < 1:
-        raise gr.Error("Please upload an image (or use examples) and compute depth first")
-
-    if plane_near >= plane_far:
-        raise gr.Error("NEAR plane must have a value smaller than the FAR plane")
-
-    # sanitize 3d viewer glb path to keep babylon.js happy
-    path_viewer_glb_sanitized = os.path.join(os.path.dirname(path_viewer_glb), "preview.glb")
-    if path_viewer_glb_sanitized != path_viewer_glb:
-        os.rename(path_viewer_glb, path_viewer_glb_sanitized)
-        path_viewer_glb = path_viewer_glb_sanitized
-
-    return path_viewer_glb, [path_files_glb, path_files_stl]
-
-
 def run_demo_server(pipe):
     process_pipe = functools.partial(process, pipe)
     os.environ["GRADIO_ALLOW_FLAGGING"] = "never"
