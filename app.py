@@ -406,9 +406,13 @@ def main():
 
     REPO_URL = "https://github.com/lemonaddie/geowizard.git"
     CHECKPOINT = "lemonaddie/Geowizard"
+    REPO_DIR = "Geowizard"
 
-    repo = git.Repo.clone_from(REPO_URL)
-    sys.path.append(os.path.join(os.getcwd()))
+    if os.path.isdir(REPO_DIR):
+        shutil.rmtree(REPO_DIR)
+    
+    repo = git.Repo.clone_from(REPO_URL, REPO_DIR)
+    sys.path.append(os.path.join(os.getcwd(), REPO_DIR))
     
     from models.depth_normal_pipeline_clip_cfg import DepthNormalEstimationPipeline
     pipeline = DepthNormalEstimationPipeline.from_pretrained("lemonaddie/Geowizard")
