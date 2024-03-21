@@ -403,8 +403,6 @@ def run_demo_server(pipe):
 
 def main():
 
-    sys.path.append(os.path.join(os.getcwd(), REPO_DIR))
-
     from diffusers import DiffusionPipeline
     pipeline = DiffusionPipeline.from_pretrained("lemonaddie/Geowizard")
 
