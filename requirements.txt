@@ -8,6 +8,10 @@ Pillow
 h5py
 matplotlib
 scikit-image==0.22.0
-gradio == 3.32.0
+gradio==4.11.0
+gradio-imageslider==0.0.16
+trimesh==4.0.5
 tqdm == 4.65.0
+accelerate>=0.22.0
+transformers>=4.32.1
 imgaug
