@@ -10,8 +10,6 @@ from PIL import Image
 
 from gradio_imageslider import ImageSlider
 
-from extrude import extrude_depth_3d
-
 
 def process(
     pipe,
@@ -85,48 +83,6 @@ def process_3d(
 
     if plane_near >= plane_far:
         raise gr.Error("NEAR plane must have a value smaller than the FAR plane")
-
-    def _process_3d(size_longest_px, filter_size, vertex_colors, scene_lights, output_model_scale=None):
-        image_rgb = input_image
-        image_depth = files[0]
-
-        image_rgb_basename, image_rgb_ext = os.path.splitext(image_rgb)
-        image_depth_basename, image_depth_ext = os.path.splitext(image_depth)
-
-        image_rgb_content = Image.open(image_rgb)
-        image_rgb_w, image_rgb_h = image_rgb_content.width, image_rgb_content.height
-        image_rgb_d = max(image_rgb_w, image_rgb_h)
-        image_new_w = size_longest_px * image_rgb_w // image_rgb_d
-        image_new_h = size_longest_px * image_rgb_h // image_rgb_d
-
-        image_rgb_new = image_rgb_basename + f"_{size_longest_px}" + image_rgb_ext
-        image_depth_new = image_depth_basename + f"_{size_longest_px}" + image_depth_ext
-        image_rgb_content.resize((image_new_w, image_new_h), Image.LANCZOS).save(
-            image_rgb_new
-        )
-        Image.open(image_depth).resize((image_new_w, image_new_h), Image.LANCZOS).save(
-            image_depth_new
-        )
-
-        path_glb, path_stl = extrude_depth_3d(
-            image_rgb_new,
-            image_depth_new,
-            output_model_scale=size_longest_cm * 10 if output_model_scale is None else output_model_scale,
-            filter_size=filter_size,
-            coef_near=plane_near,
-            coef_far=plane_far,
-            emboss=embossing / 100,
-            f_thic=frame_thickness / 100,
-            f_near=frame_near / 100,
-            f_back=frame_far / 100,
-            vertex_colors=vertex_colors,
-            scene_lights=scene_lights,
-        )
-
-        return path_glb, path_stl
-
-    path_viewer_glb, _ = _process_3d(256, filter_size, vertex_colors=False, scene_lights=True, output_model_scale=1)
-    path_files_glb, path_files_stl = _process_3d(size_longest_px, filter_size, vertex_colors=True, scene_lights=False)
 
     # sanitize 3d viewer glb path to keep babylon.js happy
     path_viewer_glb_sanitized = os.path.join(os.path.dirname(path_viewer_glb), "preview.glb")
