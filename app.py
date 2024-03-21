@@ -21,11 +21,6 @@ def process(
     path_out_16bit=None,
     path_out_fp32=None,
     path_out_vis=None,
-    _input_3d_plane_near=None,
-    _input_3d_plane_far=None,
-    _input_3d_embossing=None,
-    _input_3d_filter_size=None,
-    _input_3d_frame_near=None,
 ):
     if path_out_vis is not None:
         return (
