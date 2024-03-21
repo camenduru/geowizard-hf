@@ -414,7 +414,7 @@ def main():
     repo = git.Repo.clone_from(REPO_URL, REPO_DIR)
     sys.path.append(os.path.join(os.getcwd(), REPO_DIR))
     
-    from models.depth_normal_pipeline_clip_cfg import DepthNormalEstimationPipeline
+    from .models.depth_normal_pipeline_clip_cfg import DepthNormalEstimationPipeline
     pipeline = DepthNormalEstimationPipeline.from_pretrained("lemonaddie/Geowizard")
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
