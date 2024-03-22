@@ -13,6 +13,7 @@ from gradio_imageslider import ImageSlider
 
 import spaces
 
+@spaces.GPU
 def depth_normal(img):
     return img, img
 
@@ -298,7 +299,6 @@ def main():
     description = "Gradio demo for Geowizard."
     examples = ["files/bee.jpg"]
 
-    @spaces.GPU
     gr.Interface(
         depth_normal, 
         inputs=[gr.Image(type='pil', label="Original Image")], 
