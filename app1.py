@@ -45,7 +45,7 @@ def process(
 
     pipe_out = pipe(
         input_image,
-        denoising_steps=10,
+        denoising_steps=3,
         ensemble_size=1,
         processing_res=768,
         batch_size=0,
