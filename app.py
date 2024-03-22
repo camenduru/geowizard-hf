@@ -280,10 +280,10 @@ def main():
 
     pipe_out = pipe(
         input_image,
-        denoising_steps=denoise_steps,
-        ensemble_size=ensemble_size,
-        processing_res=processing_res,
-        batch_size=1 if processing_res == 0 else 0,
+        denoising_steps=5,
+        ensemble_size=1,
+        processing_res=768,
+        batch_size=0,
         guidance_scale=3,
         domain="indoor",
         show_progress_bar=True,
