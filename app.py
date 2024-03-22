@@ -292,7 +292,7 @@ def main():
         pass  # run without xformers
 
     pipe = pipe.to(device)
-    run_demo_server(pipe)
+    #run_demo_server(pipe)
 
     title = "Geowizard"
     description = "Gradio demo for Geowizard."
