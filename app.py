@@ -31,6 +31,7 @@ def process(
 
     input_image = Image.open(path_input)
 
+    print('aaa')
     pipe_out = pipe(
         input_image,
         ensemble_size=ensemble_size,
@@ -39,6 +40,7 @@ def process(
         batch_size=1 if processing_res == 0 else 0,
         show_progress_bar=True,
     )
+    print('bbb')
 
     depth_pred = pipe_out.depth_np
     depth_colored = pipe_out.depth_colored
