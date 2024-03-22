@@ -85,7 +85,7 @@ def run_demo_server(pipe):
     ) as demo:
         gr.Markdown(
         """
-            <h1 align="center">Geowizard Estimation</h1>
+            <h1 align="center">Geowizard Depth&Normal Estimation</h1>
         """
         )
 
@@ -99,9 +99,9 @@ def run_demo_server(pipe):
                     ensemble_size = gr.Slider(
                         label="Ensemble size",
                         minimum=1,
-                        maximum=20,
+                        maximum=15,
                         step=1,
-                        value=10,
+                        value=1,
                     )
                     denoise_steps = gr.Slider(
                         label="Number of denoising steps",
@@ -170,12 +170,8 @@ def run_demo_server(pipe):
         ]
 
         def submit_depth_fn(*args):
-            print(111)
-            print(args)
             out = list(process_pipe(*args))
-            print(222)
             out = [gr.Button(interactive=False), gr.Image(interactive=False)] + out
-            print(333)
             return out
 
         submit_btn.click(
@@ -219,7 +215,6 @@ def run_demo_server(pipe):
             inputs=[],
             outputs=blocks_settings + [
                 submit_btn,
-                #submit_3d,
                 input_image,
                 input_output_16bit,
                 input_output_fp32,
