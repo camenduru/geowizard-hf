@@ -171,8 +171,11 @@ def run_demo_server(pipe):
 
         def submit_depth_fn(*args):
             print(111)
+            print(args)
             out = list(process_pipe(*args))
+            print(222)
             out = [gr.Button(interactive=False), gr.Image(interactive=False)] + out
+            print(333)
             return out
 
         submit_btn.click(
