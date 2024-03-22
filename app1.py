@@ -12,7 +12,7 @@ from PIL import Image
 
 from gradio_imageslider import ImageSlider
 
-
+@spaces.GPU
 def process(
     pipe,
     path_input,
