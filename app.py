@@ -276,28 +276,7 @@ def main():
 
     pipe = pipe.to(device)
 
-    input_image = Image.open('files/bee.jpg')
-
-    pipe_out = pipe(
-        input_image,
-        denoising_steps=5,
-        ensemble_size=1,
-        processing_res=768,
-        batch_size=0,
-        guidance_scale=3,
-        domain="indoor",
-        show_progress_bar=True,
-    )
-
-    depth_pred: np.ndarray = pipe_out.depth_np
-    depth_colored: Image.Image = pipe_out.depth_colored
-    normal_pred: np.ndarray = pipe_out.normal_np
-    normal_colored: Image.Image = pipe_out.normal_colored
-
-    print(depth_pred.shape)
-    print(np.unique(depth_pred))
-
-    # run_demo_server(pipe)
+    run_demo_server(pipe)
 
 
 if __name__ == "__main__":
