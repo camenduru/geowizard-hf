@@ -275,11 +275,11 @@ def run_demo_server(pipe):
             input_output_16bit,
             input_output_fp32,
             input_output_vis,
-            plane_near,
-            plane_far,
-            embossing,
-            filter_size,
-            frame_near,
+            #plane_near,
+            #plane_far,
+            #embossing,
+            #filter_size,
+            #frame_near,
         ]
         outputs = [
             submit_btn,
@@ -312,11 +312,11 @@ def run_demo_server(pipe):
                     "files/bee_depth_16bit.png",
                     "files/bee_depth_fp32.npy",
                     "files/bee_depth_colored.png",
-                    0.0,  # plane_near
-                    0.5,  # plane_far
-                    20,  # embossing
-                    3,  # filter_size
-                    0,  # frame_near
+                    #0.0,  # plane_near
+                    #0.5,  # plane_far
+                    #20,  # embossing
+                    #3,  # filter_size
+                    #0,  # frame_near
                 ],
             ],
             inputs=inputs,
@@ -333,7 +333,7 @@ def run_demo_server(pipe):
                 out.append(map_id_to_default[b._id])
             out += [
                 gr.Button(interactive=True),
-                gr.Button(interactive=True),
+                #gr.Button(interactive=True),
                 gr.Image(value=None, interactive=True),
                 None, None, None, None, None, None, None,
             ]
