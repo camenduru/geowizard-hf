@@ -43,7 +43,7 @@ def depth_normal(img):
     pipe_out = pipe(
         img,
         denoising_steps=10,
-        ensemble_size=1,
+        ensemble_size=2,
         processing_res=768,
         batch_size=0,
         guidance_scale=3,
@@ -316,7 +316,6 @@ def main():
     description = "GeoWizard is a Wizard who spells 3D geometry from a single image. Upload your image into the left side."
     examples = [
     ["files/gundam.jpg"],    
-    ["files/museum.jpg"],
     ["files/indoor.jpg"]]
 
     gr.Interface(
