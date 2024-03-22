@@ -240,8 +240,6 @@ def run_demo_server(pipe):
                 input_output_vis,
                 output_slider,
                 files,
-                viewer_3d,
-                files_3d,
             ],
         )
 
