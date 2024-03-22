@@ -314,7 +314,12 @@ def main():
 
     title = "Geowizard"
     description = "GeoWizard is a Wizard who spells 3D geometry from a single image. Upload your image into the left side."
-    examples = ["files/bee.jpg"]
+    examples = [
+    ["files/gundam.jpg"],    
+    ["files/museum.jpg"],
+    ["files/indoor.jpg"],
+    ["files/catdog.jpg"],
+    ["files/venue.jpg"]]
 
     gr.Interface(
         depth_normal, 
