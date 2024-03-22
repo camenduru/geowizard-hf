@@ -62,8 +62,13 @@ def process(
 
 def run_demo_server(pipe):
     process_pipe = functools.partial(process, pipe)
+
+    print(1)
+    
     os.environ["GRADIO_ALLOW_FLAGGING"] = "never"
 
+    print(2)
+    
     with gr.Blocks(
         analytics_enabled=False,
         title="Geowizard Depth and Normal Estimation",
@@ -81,7 +86,7 @@ def run_demo_server(pipe):
         """,
     ) as demo:
         gr.Markdown(
-            """
+            """ttt
         """
         )
 
