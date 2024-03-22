@@ -69,7 +69,7 @@ def run_demo_server(pipe):
 
     with gr.Blocks(
         analytics_enabled=False,
-        title="Marigold Depth Estimation",
+        title="GeoWizard Depth and Normal Estimation",
         css="""
             #download {
                 height: 118px;
@@ -149,121 +149,7 @@ def run_demo_server(pipe):
                     interactive=False,
                 )
 
-        demo_3d_header = gr.Markdown(
-            """
-            <h3 align="center">3D Printing Depth Maps</h3>
-            <p align="justify">
-                This part of the demo uses Marigold depth maps estimated in the previous step to create a 
-                3D-printable model. The models are watertight, with correct normals, and exported in the STL format.
-                We recommended creating the first model with the default parameters and iterating on it until the best 
-                result (see Pro Tips below).
-            </p>
-            """,
-            render=False,
-        )
-
-        # demo_3d = gr.Row(render=False)
-        # with demo_3d:
-        #     with gr.Column():
-        #         with gr.Accordion("3D printing demo: Main options", open=True):
-        #             plane_near = gr.Slider(
-        #                 label="Relative position of the near plane (between 0 and 1)",
-        #                 minimum=0.0,
-        #                 maximum=1.0,
-        #                 step=0.001,
-        #                 value=0.0,
-        #             )
-        #             plane_far = gr.Slider(
-        #                 label="Relative position of the far plane (between near and 1)",
-        #                 minimum=0.0,
-        #                 maximum=1.0,
-        #                 step=0.001,
-        #                 value=1.0,
-        #             )
-        #             embossing = gr.Slider(
-        #                 label="Embossing level",
-        #                 minimum=0,
-        #                 maximum=100,
-        #                 step=1,
-        #                 value=20,
-        #             )
-        #         with gr.Accordion("3D printing demo: Advanced options", open=False):
-        #             size_longest_px = gr.Slider(
-        #                 label="Size (px) of the longest side",
-        #                 minimum=256,
-        #                 maximum=1024,
-        #                 step=256,
-        #                 value=512,
-        #             )
-        #             size_longest_cm = gr.Slider(
-        #                 label="Size (cm) of the longest side",
-        #                 minimum=1,
-        #                 maximum=100,
-        #                 step=1,
-        #                 value=10,
-        #             )
-        #             filter_size = gr.Slider(
-        #                 label="Size (px) of the smoothing filter",
-        #                 minimum=1,
-        #                 maximum=5,
-        #                 step=2,
-        #                 value=3,
-        #             )
-        #             frame_thickness = gr.Slider(
-        #                 label="Frame thickness",
-        #                 minimum=0,
-        #                 maximum=100,
-        #                 step=1,
-        #                 value=5,
-        #             )
-        #             frame_near = gr.Slider(
-        #                 label="Frame's near plane offset",
-        #                 minimum=-100,
-        #                 maximum=100,
-        #                 step=1,
-        #                 value=1,
-        #             )
-        #             frame_far = gr.Slider(
-        #                 label="Frame's far plane offset",
-        #                 minimum=1,
-        #                 maximum=10,
-        #                 step=1,
-        #                 value=1,
-        #             )
-        #         with gr.Row():
-        #             submit_3d = gr.Button(value="Create 3D", variant="primary")
-        #             clear_3d = gr.Button(value="Clear 3D")
-        #         gr.Markdown(
-        #             """
-        #             <h5 align="center">Pro Tips</h5>
-        #             <ol>
-        #               <li><b>Re-render with new parameters</b>: Click "Clear 3D" and then "Create 3D".</li>
-        #               <li><b>Adjust 3D scale and cut-off focus</b>: Set the frame's near plane offset to the 
-        #                   minimum and use 3D preview to evaluate depth scaling. Repeat until the scale is correct and 
-        #                   everything important is in the focus. Set the optimal value for frame's near 
-        #                   plane offset as a last step.</li>
-        #               <li><b>Increase details</b>: Decrease size of the smoothing filter (also increases noise).</li>
-        #             </ol>
-        #             """
-        #         )
-
-        #     with gr.Column():
-        #         viewer_3d = gr.Model3D(
-        #             camera_position=(75.0, 90.0, 1.25),
-        #             elem_classes="viewport",
-        #             label="3D preview (low-res, relief highlight)",
-        #             interactive=False,
-        #         )
-        #         files_3d = gr.Files(
-        #             label="3D model outputs (high-res)",
-        #             elem_id="download",
-        #             interactive=False,
-        #         )
-
         blocks_settings_depth = [ensemble_size, denoise_steps, processing_res]
-        # blocks_settings_3d = [plane_near, plane_far, embossing, size_longest_px, size_longest_cm, filter_size,
-        #                       frame_thickness, frame_near, frame_far]
-        # blocks_settings = blocks_settings_depth + blocks_settings_3d
         blocks_settings = blocks_settings_depth
         map_id_to_default = {b._id: b.value for b in blocks_settings}
 
@@ -275,11 +161,6 @@ def run_demo_server(pipe):
             input_output_16bit,
             input_output_fp32,
             input_output_vis,
-            #plane_near,
-            #plane_far,
-            #embossing,
-            #filter_size,
-            #frame_near,
         ]
         outputs = [
             submit_btn,
@@ -312,11 +193,6 @@ def run_demo_server(pipe):
                     "files/bee_depth_16bit.png",
                     "files/bee_depth_fp32.npy",
                     "files/bee_depth_colored.png",
-                    #0.0,  # plane_near
-                    #0.5,  # plane_far
-                    #20,  # embossing
-                    #3,  # filter_size
-                    #0,  # frame_near
                 ],
             ],
             inputs=inputs,
@@ -324,16 +200,12 @@ def run_demo_server(pipe):
             cache_examples=True,
         )
 
-        # demo_3d_header.render()
-        # demo_3d.render()
-
         def clear_fn():
             out = []
             for b in blocks_settings:
                 out.append(map_id_to_default[b._id])
             out += [
                 gr.Button(interactive=True),
-                #gr.Button(interactive=True),
                 gr.Image(value=None, interactive=True),
                 None, None, None, None, None, None, None,
             ]
@@ -351,43 +223,8 @@ def run_demo_server(pipe):
                 input_output_vis,
                 output_slider,
                 files,
-                #viewer_3d,
-                #files_3d,
             ],
         )
-
-        # def submit_3d_fn(*args):
-        #     out = list(process_3d(*args))
-        #     out = [gr.Button(interactive=False)] + out
-        #     return out
-
-        # submit_3d.click(
-        #     fn=submit_3d_fn,
-        #     inputs=[
-        #         input_image,
-        #         files,
-        #         size_longest_px,
-        #         size_longest_cm,
-        #         filter_size,
-        #         plane_near,
-        #         plane_far,
-        #         embossing,
-        #         frame_thickness,
-        #         frame_near,
-        #         frame_far,
-        #     ],
-        #     outputs=[submit_3d, viewer_3d, files_3d],
-        #     concurrency_limit=1,
-        # )
-
-        # def clear_3d_fn():
-        #     return [gr.Button(interactive=True), None, None]
-
-        # clear_3d.click(
-        #     fn=clear_3d_fn,
-        #     inputs=[],
-        #     outputs=[submit_3d, viewer_3d, files_3d],
-        # )
 
         demo.queue(
             api_open=False,
@@ -395,8 +232,6 @@ def run_demo_server(pipe):
             server_name="0.0.0.0",
             server_port=7860,
         )
-
-
 
 
 def main():
@@ -410,7 +245,6 @@ def main():
     
     repo = git.Repo.clone_from(REPO_URL, REPO_DIR)
     sys.path.append(os.path.join(os.getcwd(), REPO_DIR))
-
 
     from pipeline.depth_normal_pipeline_clip_cfg import DepthNormalEstimationPipeline
 
@@ -430,4 +264,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-# 1
