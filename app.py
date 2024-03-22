@@ -359,7 +359,7 @@ def run_demo_server(pipe):
         map_id_to_default = {b._id: b.value for b in blocks_settings}
 
         inputs = [
-            input_image,
+            input_image.cuda(),
             ensemble_size,
             denoise_steps,
             processing_res,
