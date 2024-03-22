@@ -298,6 +298,7 @@ def main():
     description = "Gradio demo for Geowizard."
     examples = ["files/bee.jpg"]
 
+    @spaces.GPU
     gr.Interface(
         depth_normal, 
         inputs=[gr.Image(type='pil', label="Original Image")], 
