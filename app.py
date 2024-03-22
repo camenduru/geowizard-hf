@@ -383,7 +383,7 @@ def main():
     from pipeline.depth_normal_pipeline_clip_cfg import DepthNormalEstimationPipeline
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")    
-    pipe = DepthNormalEstimationPipeline.from_pretrained(CHECKPOINT, use_safetensors=False)
+    pipe = DepthNormalEstimationPipeline.from_pretrained(CHECKPOINT)
     
     try:
         import xformers
