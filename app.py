@@ -62,12 +62,8 @@ def process(
 
 def run_demo_server(pipe):
     process_pipe = functools.partial(process, pipe)
-
-    print(1)
     
     os.environ["GRADIO_ALLOW_FLAGGING"] = "never"
-
-    print(2)
     
     with gr.Blocks(
         analytics_enabled=False,
@@ -162,102 +158,102 @@ def run_demo_server(pipe):
         )
 
         demo_3d = gr.Row(render=False)
-        with demo_3d:
-            with gr.Column():
-                with gr.Accordion("3D printing demo: Main options", open=True):
-                    plane_near = gr.Slider(
-                        label="Relative position of the near plane (between 0 and 1)",
-                        minimum=0.0,
-                        maximum=1.0,
-                        step=0.001,
-                        value=0.0,
-                    )
-                    plane_far = gr.Slider(
-                        label="Relative position of the far plane (between near and 1)",
-                        minimum=0.0,
-                        maximum=1.0,
-                        step=0.001,
-                        value=1.0,
-                    )
-                    embossing = gr.Slider(
-                        label="Embossing level",
-                        minimum=0,
-                        maximum=100,
-                        step=1,
-                        value=20,
-                    )
-                with gr.Accordion("3D printing demo: Advanced options", open=False):
-                    size_longest_px = gr.Slider(
-                        label="Size (px) of the longest side",
-                        minimum=256,
-                        maximum=1024,
-                        step=256,
-                        value=512,
-                    )
-                    size_longest_cm = gr.Slider(
-                        label="Size (cm) of the longest side",
-                        minimum=1,
-                        maximum=100,
-                        step=1,
-                        value=10,
-                    )
-                    filter_size = gr.Slider(
-                        label="Size (px) of the smoothing filter",
-                        minimum=1,
-                        maximum=5,
-                        step=2,
-                        value=3,
-                    )
-                    frame_thickness = gr.Slider(
-                        label="Frame thickness",
-                        minimum=0,
-                        maximum=100,
-                        step=1,
-                        value=5,
-                    )
-                    frame_near = gr.Slider(
-                        label="Frame's near plane offset",
-                        minimum=-100,
-                        maximum=100,
-                        step=1,
-                        value=1,
-                    )
-                    frame_far = gr.Slider(
-                        label="Frame's far plane offset",
-                        minimum=1,
-                        maximum=10,
-                        step=1,
-                        value=1,
-                    )
-                with gr.Row():
-                    submit_3d = gr.Button(value="Create 3D", variant="primary")
-                    clear_3d = gr.Button(value="Clear 3D")
-                gr.Markdown(
-                    """
-                    <h5 align="center">Pro Tips</h5>
-                    <ol>
-                      <li><b>Re-render with new parameters</b>: Click "Clear 3D" and then "Create 3D".</li>
-                      <li><b>Adjust 3D scale and cut-off focus</b>: Set the frame's near plane offset to the 
-                          minimum and use 3D preview to evaluate depth scaling. Repeat until the scale is correct and 
-                          everything important is in the focus. Set the optimal value for frame's near 
-                          plane offset as a last step.</li>
-                      <li><b>Increase details</b>: Decrease size of the smoothing filter (also increases noise).</li>
-                    </ol>
-                    """
-                )
+        # with demo_3d:
+        #     with gr.Column():
+        #         with gr.Accordion("3D printing demo: Main options", open=True):
+        #             plane_near = gr.Slider(
+        #                 label="Relative position of the near plane (between 0 and 1)",
+        #                 minimum=0.0,
+        #                 maximum=1.0,
+        #                 step=0.001,
+        #                 value=0.0,
+        #             )
+        #             plane_far = gr.Slider(
+        #                 label="Relative position of the far plane (between near and 1)",
+        #                 minimum=0.0,
+        #                 maximum=1.0,
+        #                 step=0.001,
+        #                 value=1.0,
+        #             )
+        #             embossing = gr.Slider(
+        #                 label="Embossing level",
+        #                 minimum=0,
+        #                 maximum=100,
+        #                 step=1,
+        #                 value=20,
+        #             )
+        #         with gr.Accordion("3D printing demo: Advanced options", open=False):
+        #             size_longest_px = gr.Slider(
+        #                 label="Size (px) of the longest side",
+        #                 minimum=256,
+        #                 maximum=1024,
+        #                 step=256,
+        #                 value=512,
+        #             )
+        #             size_longest_cm = gr.Slider(
+        #                 label="Size (cm) of the longest side",
+        #                 minimum=1,
+        #                 maximum=100,
+        #                 step=1,
+        #                 value=10,
+        #             )
+        #             filter_size = gr.Slider(
+        #                 label="Size (px) of the smoothing filter",
+        #                 minimum=1,
+        #                 maximum=5,
+        #                 step=2,
+        #                 value=3,
+        #             )
+        #             frame_thickness = gr.Slider(
+        #                 label="Frame thickness",
+        #                 minimum=0,
+        #                 maximum=100,
+        #                 step=1,
+        #                 value=5,
+        #             )
+        #             frame_near = gr.Slider(
+        #                 label="Frame's near plane offset",
+        #                 minimum=-100,
+        #                 maximum=100,
+        #                 step=1,
+        #                 value=1,
+        #             )
+        #             frame_far = gr.Slider(
+        #                 label="Frame's far plane offset",
+        #                 minimum=1,
+        #                 maximum=10,
+        #                 step=1,
+        #                 value=1,
+        #             )
+        #         with gr.Row():
+        #             submit_3d = gr.Button(value="Create 3D", variant="primary")
+        #             clear_3d = gr.Button(value="Clear 3D")
+        #         gr.Markdown(
+        #             """
+        #             <h5 align="center">Pro Tips</h5>
+        #             <ol>
+        #               <li><b>Re-render with new parameters</b>: Click "Clear 3D" and then "Create 3D".</li>
+        #               <li><b>Adjust 3D scale and cut-off focus</b>: Set the frame's near plane offset to the 
+        #                   minimum and use 3D preview to evaluate depth scaling. Repeat until the scale is correct and 
+        #                   everything important is in the focus. Set the optimal value for frame's near 
+        #                   plane offset as a last step.</li>
+        #               <li><b>Increase details</b>: Decrease size of the smoothing filter (also increases noise).</li>
+        #             </ol>
+        #             """
+        #         )
 
-            with gr.Column():
-                viewer_3d = gr.Model3D(
-                    camera_position=(75.0, 90.0, 1.25),
-                    elem_classes="viewport",
-                    label="3D preview (low-res, relief highlight)",
-                    interactive=False,
-                )
-                files_3d = gr.Files(
-                    label="3D model outputs (high-res)",
-                    elem_id="download",
-                    interactive=False,
-                )
+        #     with gr.Column():
+        #         viewer_3d = gr.Model3D(
+        #             camera_position=(75.0, 90.0, 1.25),
+        #             elem_classes="viewport",
+        #             label="3D preview (low-res, relief highlight)",
+        #             interactive=False,
+        #         )
+        #         files_3d = gr.Files(
+        #             label="3D model outputs (high-res)",
+        #             elem_id="download",
+        #             interactive=False,
+        #         )
 
         blocks_settings_depth = [ensemble_size, denoise_steps, processing_res]
         blocks_settings_3d = [plane_near, plane_far, embossing, size_longest_px, size_longest_cm, filter_size,
@@ -402,5 +398,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-# 1
-# 2
