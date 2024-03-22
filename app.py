@@ -255,7 +255,7 @@ def run_demo_server(pipe):
         #             interactive=False,
         #         )
 
-        # blocks_settings_depth = [ensemble_size, denoise_steps, processing_res]
+        blocks_settings_depth = [ensemble_size, denoise_steps, processing_res]
         # # blocks_settings_3d = [plane_near, plane_far, embossing, size_longest_px, size_longest_cm, filter_size,
         # #                       frame_thickness, frame_near, frame_far]
         # blocks_settings = blocks_settings_depth + blocks_settings_3d
