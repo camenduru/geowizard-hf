@@ -504,7 +504,7 @@ def main():
     from pipeline.depth_normal_pipeline_clip_cfg import DepthNormalEstimationPipeline
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")  
-    print(device)
+    a = torch.zeros((1), device=device)
     pipe = DepthNormalEstimationPipeline.from_pretrained(CHECKPOINT)
     
     try:
