@@ -24,27 +24,22 @@ def process(
     path_out_vis=None,
 ):
 
-    print('4424')
     if path_out_vis is not None:
         return (
             [path_out_16bit, path_out_vis],
             [path_out_16bit, path_out_fp32, path_out_vis],
         )
 
-    print('44a4')
     input_image = Image.open(path_input)
-    print('55b5')
 
-    print('aaa')
     pipe_out = pipe(
         input_image,
-        ensemble_size=ensemble_size,
         denoising_steps=denoise_steps,
+        ensemble_size=ensemble_size,
         processing_res=processing_res,
         batch_size=1 if processing_res == 0 else 0,
         show_progress_bar=True,
     )
-    print('bbb')
 
     depth_pred = pipe_out.depth_np
     depth_colored = pipe_out.depth_colored
@@ -102,7 +97,7 @@ def run_demo_server(pipe):
                     type="filepath",
                 )
                 with gr.Accordion("Advanced options", open=False):
-                    processing_res = gr.Radio(
+                    domain = gr.Radio(
                         [
                             ("Outdoor", "outdoor"),
                             ("Indoor", "indoor"),
@@ -111,7 +106,7 @@ def run_demo_server(pipe):
                         label="Data Domain",
                         value="indoor",
                     )
-                    denoise_steps = gr.Slider(
+                    cfg_scale = gr.Slider(
                         label="Classifier Free Guidance Scale",
                         minimum=1,
                         maximum=5,
@@ -153,7 +148,7 @@ def run_demo_server(pipe):
                     visible=False,
                 )
                 with gr.Row():
-                    submit_btn = gr.Button(value="Compute Depth", variant="primary")
+                    submit_btn = gr.Button(value="Compute", variant="primary")
                     clear_btn = gr.Button(value="Clear")
             with gr.Column():
                 output_slider = ImageSlider(
