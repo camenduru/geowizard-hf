@@ -296,6 +296,7 @@ def main():
 
     title = "Geowizard"
     description = "Gradio demo for Geowizard."
+    examples = ["files/bee.jpg"]
 
     gr.Interface(
         depth_normal, 
