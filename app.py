@@ -13,6 +13,30 @@ from gradio_imageslider import ImageSlider
 
 import spaces
 
+ REPO_URL = "https://github.com/lemonaddie/geowizard.git"
+    CHECKPOINT = "lemonaddie/Geowizard"
+    REPO_DIR = "geowizard"
+    
+    if os.path.isdir(REPO_DIR):
+        shutil.rmtree(REPO_DIR)
+    
+    repo = git.Repo.clone_from(REPO_URL, REPO_DIR)
+    sys.path.append(os.path.join(os.getcwd(), REPO_DIR))
+
+    from pipeline.depth_normal_pipeline_clip_cfg import DepthNormalEstimationPipeline
+
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")  
+    pipe = DepthNormalEstimationPipeline.from_pretrained(CHECKPOINT)
+    
+    try:
+        import xformers
+        pipe.enable_xformers_memory_efficient_attention()
+    except:
+        pass  # run without xformers
+
+    pipe = pipe.to(device)
+    #run_demo_server(pipe)
+
 @spaces.GPU
 def depth_normal(img):
 
@@ -286,29 +310,7 @@ def depth_normal(img):
 
 def main():
 
-    REPO_URL = "https://github.com/lemonaddie/geowizard.git"
-    CHECKPOINT = "lemonaddie/Geowizard"
-    REPO_DIR = "geowizard"
-    
-    if os.path.isdir(REPO_DIR):
-        shutil.rmtree(REPO_DIR)
-    
-    repo = git.Repo.clone_from(REPO_URL, REPO_DIR)
-    sys.path.append(os.path.join(os.getcwd(), REPO_DIR))
-
-    from pipeline.depth_normal_pipeline_clip_cfg import DepthNormalEstimationPipeline
-
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")  
-    pipe = DepthNormalEstimationPipeline.from_pretrained(CHECKPOINT)
-    
-    try:
-        import xformers
-        pipe.enable_xformers_memory_efficient_attention()
-    except:
-        pass  # run without xformers
-
-    pipe = pipe.to(device)
-    #run_demo_server(pipe)
+   
 
     title = "Geowizard"
     description = "Gradio demo for Geowizard."
