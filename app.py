@@ -14,8 +14,23 @@ from gradio_imageslider import ImageSlider
 import spaces
 
 @spaces.GPU
-def depth_normal(img):
-    return img, img
+def depth_normal(img, pipe):
+
+    pipe_out = pipe(
+        input_image,
+        denoising_steps=10,
+        ensemble_size=1,
+        processing_res=768,
+        batch_size=0,
+        guidance_scale=3,
+        domain="indoor",
+        show_progress_bar=True,
+    )
+
+    depth_colored = pipe_out.depth_colored
+    normal_colored = pipe_out.normal_colored
+    
+    return depth_colored, normal_colored
 
 # @spaces.GPU
 # def run_demo_server(pipe):
@@ -301,7 +316,7 @@ def main():
 
     gr.Interface(
         depth_normal, 
-        inputs=[gr.Image(type='pil', label="Original Image")], 
+        inputs=[gr.Image(type='pil', label="Original Image"), pipe], 
         outputs=[gr.Image(type="pil",label="Output Depth"), gr.Image(type="pil",label="Output Normal")], 
         title=title, description=description, article='1', examples=examples, analytics_enabled=False).launch()
 
