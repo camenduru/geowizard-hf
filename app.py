@@ -313,14 +313,14 @@ def main():
    
 
     title = "Geowizard"
-    description = "Gradio demo for Geowizard."
+    description = "GeoWizard is a Wizard who spells 3D geometry from a single image. Upload your image into the left side."
     examples = ["files/bee.jpg"]
 
     gr.Interface(
         depth_normal, 
         inputs=[gr.Image(type='pil', label="Original Image")], 
         outputs=[gr.Image(type="pil",label="Output Depth"), gr.Image(type="pil",label="Output Normal")], 
-        title=title, description=description, article='1', examples=examples, analytics_enabled=False).launch()
+        title=title, description=description, article='', examples=examples, analytics_enabled=False).launch()
 
 
 if __name__ == "__main__":
