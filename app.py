@@ -136,7 +136,7 @@ def process_3d(
 
     return path_viewer_glb, [path_files_glb, path_files_stl]
 
-
+@spaces.GPU
 def run_demo_server(pipe):
     process_pipe = functools.partial(process, pipe)
     os.environ["GRADIO_ALLOW_FLAGGING"] = "never"
@@ -490,7 +490,7 @@ def run_demo_server(pipe):
 
 
 
-@spaces.GPU
+
 def main():
 
     REPO_URL = "https://github.com/lemonaddie/geowizard.git"
