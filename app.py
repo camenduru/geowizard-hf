@@ -120,7 +120,7 @@ def run_demo_server(pipe):
                         minimum=1,
                         maximum=20,
                         step=1,
-                        value=10,
+                        value=2,
                     )
                     ensemble_size = gr.Slider(
                         label="Ensemble size",
@@ -277,24 +277,7 @@ def main():
 
     pipe = pipe.to(device)
 
-        
-    input_image = Image.open('files/bee.jpg')
-    print(1)
-    
-    pipe_out = pipe(
-        input_image,
-        denosing_steps=10,
-        ensemble_size=1,
-        processing_res=768,
-        batch_size=0,
-        guidance_scale=3,
-        domain="indoor",
-        show_progress_bar=True,
-    )
-
-    print(1)
-    
-    # run_demo_server(pipe)
+    run_demo_server(pipe)
 
 
 if __name__ == "__main__":
