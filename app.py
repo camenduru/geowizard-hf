@@ -41,7 +41,7 @@ pipe = pipe.to(device)
 def depth_normal(img):
 
     pipe_out = pipe(
-        input_image,
+        img,
         denoising_steps=10,
         ensemble_size=1,
         processing_res=768,
