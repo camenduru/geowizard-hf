@@ -126,7 +126,7 @@ def run_demo_server(pipe):
                         minimum=1,
                         maximum=20,
                         step=1,
-                        value=10,
+                        value=1,
                     )
                     denoise_steps = gr.Slider(
                         label="Number of denoising steps",
@@ -406,7 +406,7 @@ def main():
 
     from pipeline.depth_normal_pipeline_clip_cfg import DepthNormalEstimationPipeline
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")  
+    #device = torch.device("cuda" if torch.cuda.is_available() else "cpu")  
     pipe = DepthNormalEstimationPipeline.from_pretrained(CHECKPOINT)
     
     try:
@@ -415,14 +415,13 @@ def main():
     except:
         pass  # run without xformers
 
-    pipe = pipe.to(device)
     try:
         import xformers
         pipe.enable_xformers_memory_efficient_attention()
     except:
         pass  # run without xformers
 
-    pipe = pipe.to(device)
+    pipe = pipe.to('cuda')
     prefetch_hf_cache(pipe)
     run_demo_server(pipe)
 
