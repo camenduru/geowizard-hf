@@ -25,7 +25,7 @@ def run_demo_server(pipe):
     
     gr.Interface(
         depth_normal, 
-        inputs=[gr.Image(type='pil', label="Original Image"), 
+        inputs=[gr.Image(type='pil', label="Original Image")], 
         outputs=[gr.Image(type="pil",label="Output Depth"), gr.Image(type="pil",label="Output Normal")], 
         title=title, description=description, article='1', examples=examples, analytics_enabled=False).launch()
 
