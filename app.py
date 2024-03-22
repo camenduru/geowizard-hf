@@ -359,7 +359,7 @@ def run_demo_server(pipe):
         map_id_to_default = {b._id: b.value for b in blocks_settings}
 
         inputs = [
-            input_image.cuda(),
+            input_image,
             ensemble_size,
             denoise_steps,
             processing_res,
@@ -503,7 +503,8 @@ def main():
     
     from pipeline.depth_normal_pipeline_clip_cfg import DepthNormalEstimationPipeline
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")    
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")  
+    print(device)
     pipe = DepthNormalEstimationPipeline.from_pretrained(CHECKPOINT)
     
     try:
