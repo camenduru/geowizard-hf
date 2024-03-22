@@ -295,7 +295,7 @@ def main():
     normal_colored: Image.Image = pipe_out.normal_colored
 
     print(depth_pred.shape)
-    print(normal_pred.shape)
+    print(np.unique(depth_pred))
 
     # run_demo_server(pipe)
 
