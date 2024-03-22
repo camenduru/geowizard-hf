@@ -381,13 +381,10 @@ def main():
     sys.path.append(os.path.join(os.getcwd(), REPO_DIR))
     
     from pipeline.depth_normal_pipeline_clip_cfg import DepthNormalEstimationPipeline
-    pipeline = DepthNormalEstimationPipeline.from_pretrained("lemonaddie/Geowizard")
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-    print(1)
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")    
+    pipe = DepthNormalEstimationPipeline.from_pretrained(CHECKPOINT)
     
-    pipe = pipeline.from_pretrained(CHECKPOINT)
     try:
         import xformers
         pipe.enable_xformers_memory_efficient_attention()
@@ -401,4 +398,3 @@ def main():
 if __name__ == "__main__":
     main()
 # 1
-# 2
