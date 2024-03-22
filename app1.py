@@ -66,8 +66,6 @@ def process(
     )
 
 
-
-@spaces.GPU
 def run_demo_server(pipe):
     process_pipe = functools.partial(process, pipe)
     os.environ["GRADIO_ALLOW_FLAGGING"] = "never"
@@ -90,7 +88,7 @@ def run_demo_server(pipe):
     ) as demo:
         gr.Markdown(
             """
-            <h1 align="center">Marigold Depth Estimation</h1>
+            <h1 align="center">Geowizard</h1>
             <p align="center">
             <a title="Website" href="https://marigoldmonodepth.github.io/" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
                 <img src="https://www.obukhov.ai/img/badges/badge-website.svg">
