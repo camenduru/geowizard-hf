@@ -13,7 +13,7 @@ from gradio_imageslider import ImageSlider
 
 import spaces
 
-def identity(img):
+def depth_normal(img):
     return img, img
 
 @spaces.GPU
