@@ -317,9 +317,7 @@ def main():
     examples = [
     ["files/gundam.jpg"],    
     ["files/museum.jpg"],
-    ["files/indoor.jpg"],
-    ["files/catdog.jpg"],
-    ["files/venue.jpg"]]
+    ["files/indoor.jpg"]]
 
     gr.Interface(
         depth_normal, 
