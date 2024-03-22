@@ -112,10 +112,8 @@ def run_demo_server(pipe):
             </a>
             </p>
             <p align="justify">
-                Marigold is the new state-of-the-art depth estimator for images in the wild. 
-                Upload your image into the <b>left</b> side, or click any of the <b>examples</b> below.
-                The result will be computed and appear on the <b>right</b> in the output comparison window.
-                <b style="color: red;">NEW</b>: Scroll down to the new 3D printing part of the demo! 
+                GeoWizard is a Wizard to spell 3D geometry from a single image. 
+                Upload your image into the <b>left</b> side. 
             </p>
         """
         )
