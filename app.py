@@ -157,7 +157,7 @@ def run_demo_server(pipe):
             render=False,
         )
 
-        demo_3d = gr.Row(render=False)
+        #demo_3d = gr.Row(render=False)
         # with demo_3d:
         #     with gr.Column():
         #         with gr.Accordion("3D printing demo: Main options", open=True):
@@ -255,47 +255,47 @@ def run_demo_server(pipe):
         #             interactive=False,
         #         )
 
-        blocks_settings_depth = [ensemble_size, denoise_steps, processing_res]
-        blocks_settings_3d = [plane_near, plane_far, embossing, size_longest_px, size_longest_cm, filter_size,
-                              frame_thickness, frame_near, frame_far]
-        blocks_settings = blocks_settings_depth + blocks_settings_3d
-        map_id_to_default = {b._id: b.value for b in blocks_settings}
+        # blocks_settings_depth = [ensemble_size, denoise_steps, processing_res]
+        # # blocks_settings_3d = [plane_near, plane_far, embossing, size_longest_px, size_longest_cm, filter_size,
+        # #                       frame_thickness, frame_near, frame_far]
+        # # blocks_settings = blocks_settings_depth + blocks_settings_3d
+        # map_id_to_default = {b._id: b.value for b in blocks_settings}
 
-        inputs = [
-            input_image,
-            ensemble_size,
-            denoise_steps,
-            processing_res,
-            input_output_16bit,
-            input_output_fp32,
-            input_output_vis,
-            plane_near,
-            plane_far,
-            embossing,
-            filter_size,
-            frame_near,
-        ]
-        outputs = [
-            submit_btn,
-            input_image,
-            output_slider,
-            files,
-        ]
+        # inputs = [
+        #     input_image,
+        #     ensemble_size,
+        #     denoise_steps,
+        #     processing_res,
+        #     input_output_16bit,
+        #     input_output_fp32,
+        #     input_output_vis,
+        #     plane_near,
+        #     plane_far,
+        #     embossing,
+        #     filter_size,
+        #     frame_near,
+        # ]
+        # outputs = [
+        #     submit_btn,
+        #     input_image,
+        #     output_slider,
+        #     files,
+        # ]
 
-        def submit_depth_fn(*args):
-            out = list(process_pipe(*args))
-            out = [gr.Button(interactive=False), gr.Image(interactive=False)] + out
-            return out
+        # def submit_depth_fn(*args):
+        #     out = list(process_pipe(*args))
+        #     out = [gr.Button(interactive=False), gr.Image(interactive=False)] + out
+        #     return out
 
-        submit_btn.click(
-            fn=submit_depth_fn,
-            inputs=inputs,
-            outputs=outputs,
-            concurrency_limit=1,
-        )
+        # submit_btn.click(
+        #     fn=submit_depth_fn,
+        #     inputs=inputs,
+        #     outputs=outputs,
+        #     concurrency_limit=1,
+        # )
 
-        demo_3d_header.render()
-        demo_3d.render()
+        # demo_3d_header.render()
+        # demo_3d.render()
 
         def clear_fn():
             out = []
@@ -314,50 +314,50 @@ def run_demo_server(pipe):
             inputs=[],
             outputs=blocks_settings + [
                 submit_btn,
-                submit_3d,
+                #submit_3d,
                 input_image,
                 input_output_16bit,
                 input_output_fp32,
                 input_output_vis,
                 output_slider,
                 files,
-                viewer_3d,
-                files_3d,
+                #viewer_3d,
+                #files_3d,
             ],
         )
 
-        def submit_3d_fn(*args):
-            out = list(process_3d(*args))
-            out = [gr.Button(interactive=False)] + out
-            return out
+        # def submit_3d_fn(*args):
+        #     out = list(process_3d(*args))
+        #     out = [gr.Button(interactive=False)] + out
+        #     return out
 
-        submit_3d.click(
-            fn=submit_3d_fn,
-            inputs=[
-                input_image,
-                files,
-                size_longest_px,
-                size_longest_cm,
-                filter_size,
-                plane_near,
-                plane_far,
-                embossing,
-                frame_thickness,
-                frame_near,
-                frame_far,
-            ],
-            outputs=[submit_3d, viewer_3d, files_3d],
-            concurrency_limit=1,
-        )
+        # submit_3d.click(
+        #     fn=submit_3d_fn,
+        #     inputs=[
+        #         input_image,
+        #         files,
+        #         size_longest_px,
+        #         size_longest_cm,
+        #         filter_size,
+        #         plane_near,
+        #         plane_far,
+        #         embossing,
+        #         frame_thickness,
+        #         frame_near,
+        #         frame_far,
+        #     ],
+        #     outputs=[submit_3d, viewer_3d, files_3d],
+        #     concurrency_limit=1,
+        # )
 
-        def clear_3d_fn():
-            return [gr.Button(interactive=True), None, None]
+        # def clear_3d_fn():
+        #     return [gr.Button(interactive=True), None, None]
 
-        clear_3d.click(
-            fn=clear_3d_fn,
-            inputs=[],
-            outputs=[submit_3d, viewer_3d, files_3d],
-        )
+        # clear_3d.click(
+        #     fn=clear_3d_fn,
+        #     inputs=[],
+        #     outputs=[submit_3d, viewer_3d, files_3d],
+        # )
 
         demo.queue(
             api_open=False,
