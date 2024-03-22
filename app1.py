@@ -33,13 +33,24 @@ def process(
 
     input_image = Image.open(path_input)
 
+    # pipe_out = pipe(
+    #     input_image,
+    #     ensemble_size=ensemble_size,
+    #     denoising_steps=denoise_steps,
+    #     processing_res=processing_res,
+    #     domain=domain,
+    #     batch_size=1 if processing_res == 0 else 0,
+    #     show_progress_bar=True,
+    # )
+
     pipe_out = pipe(
         input_image,
-        ensemble_size=ensemble_size,
-        denoising_steps=denoise_steps,
-        processing_res=processing_res,
-        domain=domain,
-        batch_size=1 if processing_res == 0 else 0,
+        denoising_steps=10,
+        ensemble_size=1,
+        processing_res=768,
+        batch_size=0,
+        guidance_scale=3,
+        domain="indoor",
         show_progress_bar=True,
     )
 
@@ -88,19 +99,16 @@ def run_demo_server(pipe):
     ) as demo:
         gr.Markdown(
             """
-            <h1 align="center">Geowizard</h1>
+            <h1 align="center">GeoWizard</h1>
             <p align="center">
-            <a title="Website" href="https://marigoldmonodepth.github.io/" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
+            <a title="Website" href="https://fuxiao0719.github.io/projects/geowizard/" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
                 <img src="https://www.obukhov.ai/img/badges/badge-website.svg">
             </a>
-            <a title="arXiv" href="https://arxiv.org/abs/2312.02145" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
+            <a title="arXiv" href="https://arxiv.org/abs/2403.12013" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
                 <img src="https://www.obukhov.ai/img/badges/badge-pdf.svg">
             </a>
-            <a title="Github" href="https://github.com/prs-eth/marigold" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
-                <img src="https://img.shields.io/github/stars/prs-eth/marigold?label=GitHub%20%E2%98%85&logo=github&color=C8C" alt="badge-github-stars">
-            </a>
-            <a title="Social" href="https://twitter.com/antonobukhov1" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
-                <img src="https://www.obukhov.ai/img/badges/badge-social.svg" alt="social">
+            <a title="Github" href="https://github.com/fuxiao0719/GeoWizard" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
+                <img src="https://img.shields.io/github/stars/fuxiao0719/GeoWizard" alt="badge-github-stars">
             </a>
             </p>
             <p align="justify">
