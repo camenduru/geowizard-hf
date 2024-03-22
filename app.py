@@ -156,8 +156,28 @@ def run_demo_server(pipe):
         """,
     ) as demo:
         gr.Markdown(
-            """
-            <h1 align="center">Geowizard</h1>
+        """
+            <h1 align="center">Marigold Depth Estimation</h1>
+            <p align="center">
+            <a title="Website" href="https://marigoldmonodepth.github.io/" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
+                <img src="https://www.obukhov.ai/img/badges/badge-website.svg">
+            </a>
+            <a title="arXiv" href="https://arxiv.org/abs/2312.02145" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
+                <img src="https://www.obukhov.ai/img/badges/badge-pdf.svg">
+            </a>
+            <a title="Github" href="https://github.com/prs-eth/marigold" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
+                <img src="https://img.shields.io/github/stars/prs-eth/marigold?label=GitHub%20%E2%98%85&logo=github&color=C8C" alt="badge-github-stars">
+            </a>
+            <a title="Social" href="https://twitter.com/antonobukhov1" target="_blank" rel="noopener noreferrer" style="display: inline-block;">
+                <img src="https://www.obukhov.ai/img/badges/badge-social.svg" alt="social">
+            </a>
+            </p>
+            <p align="justify">
+                Marigold is the new state-of-the-art depth estimator for images in the wild. 
+                Upload your image into the <b>left</b> side, or click any of the <b>examples</b> below.
+                The result will be computed and appear on the <b>right</b> in the output comparison window.
+                <b style="color: red;">NEW</b>: Scroll down to the new 3D printing part of the demo! 
+            </p>
         """
         )
 
