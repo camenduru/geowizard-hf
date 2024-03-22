@@ -216,29 +216,6 @@ def run_demo_server(pipe):
             concurrency_limit=1,
         )
 
-        gr.Examples(
-            fn=submit_depth_fn,
-            examples=[
-                [
-                    "files/bee.jpg",
-                    10,  # ensemble_size
-                    10,  # denoise_steps
-                    768,  # processing_res
-                    "files/bee_depth_16bit.png",
-                    "files/bee_depth_fp32.npy",
-                    "files/bee_depth_colored.png",
-                    0.0,  # plane_near
-                    0.5,  # plane_far
-                    20,  # embossing
-                    3,  # filter_size
-                    0,  # frame_near
-                ],
-            ],
-            inputs=inputs,
-            outputs=outputs,
-            cache_examples=True,
-        )
-
 
         def clear_fn():
             out = []
