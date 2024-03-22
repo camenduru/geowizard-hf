@@ -27,8 +27,8 @@ def process(
 ):
     if path_out_vis is not None:
         return (
-            [path_out_16bit, path_out_vis],
-            [path_out_16bit, path_out_fp32, path_out_vis],
+            [normal_out_vis, path_out_vis],
+            [normal_out_vis, path_out_fp32, path_out_vis],
         )
 
     input_image = Image.open(path_input)
