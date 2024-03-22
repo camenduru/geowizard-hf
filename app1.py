@@ -67,8 +67,8 @@ def process(
     normal_out_vis = os.path.join(path_output_dir, f"{name_base}_normal_colored.png")
     path_out_vis = os.path.join(path_output_dir, f"{name_base}_depth_colored.png")
 
-    np.save(path_out_fp32, depth_pred)
-    Image.fromarray(normal_out_vis).save(normal_out_vis)
+    #np.save(path_out_fp32, depth_pred)
+    #Image.fromarray(normal_out_vis).save(normal_out_vis)
     depth_colored.save(path_out_vis)
 
     return (
@@ -112,7 +112,7 @@ def run_demo_server(pipe):
             </a>
             </p>
             <p align="justify">
-                GeoWizard is a Wizard to spell 3D geometry from a single image. 
+                GeoWizard is a Wizard who spells 3D geometry from a single image. 
                 Upload your image into the <b>left</b> side. 
             </p>
         """
