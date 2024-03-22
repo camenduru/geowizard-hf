@@ -258,7 +258,8 @@ def run_demo_server(pipe):
         # blocks_settings_depth = [ensemble_size, denoise_steps, processing_res]
         # # blocks_settings_3d = [plane_near, plane_far, embossing, size_longest_px, size_longest_cm, filter_size,
         # #                       frame_thickness, frame_near, frame_far]
-        # # blocks_settings = blocks_settings_depth + blocks_settings_3d
+        # blocks_settings = blocks_settings_depth + blocks_settings_3d
+        blocks_settings = blocks_settings_depth
         # map_id_to_default = {b._id: b.value for b in blocks_settings}
 
         # inputs = [
@@ -303,7 +304,7 @@ def run_demo_server(pipe):
                 out.append(map_id_to_default[b._id])
             out += [
                 gr.Button(interactive=True),
-                gr.Button(interactive=True),
+                #gr.Button(interactive=True),
                 gr.Image(value=None, interactive=True),
                 None, None, None, None, None, None, None,
             ]
