@@ -16,18 +16,18 @@ import spaces
 def depth_normal(img):
     return img, img
 
-@spaces.GPU
-def run_demo_server(pipe):
-    title = "Geowizard"
-    description = "Gradio demo for Geowizard."
+# @spaces.GPU
+# def run_demo_server(pipe):
+#     title = "Geowizard"
+#     description = "Gradio demo for Geowizard."
 
-    examples = ["files/bee.jpg"]
+#     examples = ["files/bee.jpg"]
     
-    gr.Interface(
-        depth_normal, 
-        inputs=[gr.Image(type='pil', label="Original Image")], 
-        outputs=[gr.Image(type="pil",label="Output Depth"), gr.Image(type="pil",label="Output Normal")], 
-        title=title, description=description, article='1', examples=examples, analytics_enabled=False).launch()
+#     # gr.Interface(
+#     #     depth_normal, 
+#     #     inputs=[gr.Image(type='pil', label="Original Image")], 
+#     #     outputs=[gr.Image(type="pil",label="Output Depth"), gr.Image(type="pil",label="Output Normal")], 
+#     #     title=title, description=description, article='1', examples=examples, analytics_enabled=False).launch()
 
     
 # def process(
@@ -293,7 +293,13 @@ def main():
 
     pipe = pipe.to(device)
 
-    run_demo_server(pipe)
+    #run_demo_server(pipe)
+
+    gr.Interface(
+        depth_normal, 
+        inputs=[gr.Image(type='pil', label="Original Image")], 
+        outputs=[gr.Image(type="pil",label="Output Depth"), gr.Image(type="pil",label="Output Normal")], 
+        title=title, description=description, article='1', examples=examples, analytics_enabled=False).launch()
 
 
 if __name__ == "__main__":
