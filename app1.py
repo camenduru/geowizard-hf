@@ -182,7 +182,7 @@ def run_demo_server(pipe):
                     interactive=False,
                 )
 
-        blocks_settings_depth = [ensemble_size, denoise_steps, processing_res]
+        blocks_settings_depth = [ensemble_size, denoise_steps, processing_res, domain]
         blocks_settings = blocks_settings_depth
         map_id_to_default = {b._id: b.value for b in blocks_settings}
 
