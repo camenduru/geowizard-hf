@@ -189,7 +189,6 @@ def run_demo_server(pipe):
         ]
 
         def submit_depth_fn(*args):
-            print('args')
             out = list(process_pipe(*args))
             out = [gr.Button(interactive=False), gr.Image(interactive=False)] + out
             return out
@@ -277,7 +276,28 @@ def main():
 
     pipe = pipe.to(device)
 
-    run_demo_server(pipe)
+    input_image = Image.open('files/bee.jpg')
+
+    pipe_out = pipe(
+        input_image,
+        denoising_steps=denoise_steps,
+        ensemble_size=ensemble_size,
+        processing_res=processing_res,
+        batch_size=1 if processing_res == 0 else 0,
+        guidance_scale=3,
+        domain="indoor",
+        show_progress_bar=True,
+    )
+
+    depth_pred: np.ndarray = pipe_out.depth_np
+    depth_colored: Image.Image = pipe_out.depth_colored
+    normal_pred: np.ndarray = pipe_out.normal_np
+    normal_colored: Image.Image = pipe_out.normal_colored
+
+    print(depth_pred.shape)
+    print(normal_pred.shape)
+
+    # run_demo_server(pipe)
 
 
 if __name__ == "__main__":
