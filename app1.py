@@ -67,6 +67,7 @@ def process(
 
 
 
+@spaces.GPU
 def run_demo_server(pipe):
     process_pipe = functools.partial(process, pipe)
     os.environ["GRADIO_ALLOW_FLAGGING"] = "never"
