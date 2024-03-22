@@ -91,7 +91,7 @@ def run_demo_server(pipe):
     ) as demo:
         gr.Markdown(
         """
-            <h1 align="center">Geowizard Depth&Normal Estimation</h1>
+            <h1 align="center">Geowizard Depth & Normal Estimation</h1>
         """
         )
 
@@ -102,12 +102,21 @@ def run_demo_server(pipe):
                     type="filepath",
                 )
                 with gr.Accordion("Advanced options", open=False):
-                    ensemble_size = gr.Slider(
-                        label="Ensemble size",
+                    processing_res = gr.Radio(
+                        [
+                            ("Outdoor", "outdoor"),
+                            ("Indoor", "indoor"),
+                            ("Object", "object"),
+                        ],
+                        label="Data Domain",
+                        value="indoor",
+                    )
+                    denoise_steps = gr.Slider(
+                        label="Classifier Free Guidance Scale",
                         minimum=1,
-                        maximum=15,
+                        maximum=5,
                         step=1,
-                        value=1,
+                        value=3,
                     )
                     denoise_steps = gr.Slider(
                         label="Number of denoising steps",
@@ -115,6 +124,13 @@ def run_demo_server(pipe):
                         maximum=20,
                         step=1,
                         value=10,
+                    )
+                    ensemble_size = gr.Slider(
+                        label="Ensemble size",
+                        minimum=1,
+                        maximum=15,
+                        step=1,
+                        value=1,
                     )
                     processing_res = gr.Radio(
                         [
