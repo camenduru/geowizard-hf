@@ -23,13 +23,17 @@ def process(
     path_out_fp32=None,
     path_out_vis=None,
 ):
+
+    print('4424')
     if path_out_vis is not None:
         return (
             [path_out_16bit, path_out_vis],
             [path_out_16bit, path_out_fp32, path_out_vis],
         )
 
+    print('44a4')
     input_image = Image.open(path_input)
+    print('55b5')
 
     print('aaa')
     pipe_out = pipe(
@@ -172,6 +176,7 @@ def run_demo_server(pipe):
         ]
 
         def submit_depth_fn(*args):
+            print('args')
             out = list(process_pipe(*args))
             out = [gr.Button(interactive=False), gr.Image(interactive=False)] + out
             return out
