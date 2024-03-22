@@ -14,7 +14,7 @@ from gradio_imageslider import ImageSlider
 import spaces
 
 @spaces.GPU
-def depth_normal(img, pipe):
+def depth_normal(img):
 
     pipe_out = pipe(
         input_image,
