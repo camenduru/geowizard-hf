@@ -277,11 +277,6 @@ def run_demo_server(pipe):
         )
 
 
-def prefetch_hf_cache(pipe):
-    process(pipe, "files/bee.jpg", 1, 1, 64)
-    shutil.rmtree("files/bee_output")
-
-
 def main():
 
     REPO_URL = "https://github.com/lemonaddie/geowizard.git"
@@ -312,7 +307,6 @@ def main():
         pass  # run without xformers
 
     pipe = pipe.to('cuda')
-    prefetch_hf_cache(pipe)
     run_demo_server(pipe)
 
 
