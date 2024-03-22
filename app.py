@@ -500,11 +500,11 @@ def main():
     
     repo = git.Repo.clone_from(REPO_URL, REPO_DIR)
     sys.path.append(os.path.join(os.getcwd(), REPO_DIR))
-    
+
+    +import spaces
     from pipeline.depth_normal_pipeline_clip_cfg import DepthNormalEstimationPipeline
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")  
-    a = torch.zeros((1), device=device)
     pipe = DepthNormalEstimationPipeline.from_pretrained(CHECKPOINT)
     
     try:
@@ -514,6 +514,8 @@ def main():
         pass  # run without xformers
 
     pipe = pipe.to(device)
+    
+    +@spaces.GPU
     run_demo_server(pipe)
 
 
