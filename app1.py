@@ -20,10 +20,10 @@ def process(
     denoise_steps,
     processing_res,
     domain,
-    path_out_16bit=None,
+    normal_out_vis=None,
     path_out_fp32=None,
     path_out_vis=None,
-    normal_out_vis=None,
+    
 ):
     if path_out_vis is not None:
         return (
@@ -45,6 +45,7 @@ def process(
 
     depth_pred = pipe_out.depth_np
     depth_colored = pipe_out.depth_colored
+    normal_colored = pipe_out.normal_colored
     depth_16bit = (depth_pred * 65535.0).astype(np.uint16)
 
     path_output_dir = os.path.splitext(path_input)[0] + "_output"
@@ -52,7 +53,7 @@ def process(
 
     name_base = os.path.splitext(os.path.basename(path_input))[0]
     path_out_fp32 = os.path.join(path_output_dir, f"{name_base}_depth_fp32.npy")
-    path_out_16bit = os.path.join(path_output_dir, f"{name_base}_depth_16bit.png")
+    normal_out_vis = os.path.join(path_output_dir, f"{name_base}_normal_colored.png")
     path_out_vis = os.path.join(path_output_dir, f"{name_base}_depth_colored.png")
 
     np.save(path_out_fp32, depth_pred)
@@ -60,8 +61,8 @@ def process(
     depth_colored.save(path_out_vis)
 
     return (
-        [path_out_16bit, path_out_vis],
-        [path_out_16bit, path_out_fp32, path_out_vis],
+        [normal_out_vis, path_out_vis],
+        [normal_out_vis, path_out_fp32, path_out_vis],
     )
 
 
