@@ -408,48 +408,6 @@ def run_demo_server(pipe):
                     3,  # filter_size
                     0,  # frame_near
                 ],
-                [
-                    "files/cat.jpg",
-                    10,  # ensemble_size
-                    10,  # denoise_steps
-                    768,  # processing_res
-                    "files/cat_depth_16bit.png",
-                    "files/cat_depth_fp32.npy",
-                    "files/cat_depth_colored.png",
-                    0.0,  # plane_near
-                    0.3,  # plane_far
-                    20,  # embossing
-                    3,  # filter_size
-                    0,  # frame_near
-                ],
-                [
-                    "files/swings.jpg",
-                    10,  # ensemble_size
-                    10,  # denoise_steps
-                    768,  # processing_res
-                    "files/swings_depth_16bit.png",
-                    "files/swings_depth_fp32.npy",
-                    "files/swings_depth_colored.png",
-                    0.05,  # plane_near
-                    0.25,  # plane_far
-                    10,  # embossing
-                    1,  # filter_size
-                    0,  # frame_near
-                ],
-                [
-                    "files/einstein.jpg",
-                    10,  # ensemble_size
-                    10,  # denoise_steps
-                    768,  # processing_res
-                    "files/einstein_depth_16bit.png",
-                    "files/einstein_depth_fp32.npy",
-                    "files/einstein_depth_colored.png",
-                    0.0,  # plane_near
-                    0.5,  # plane_far
-                    50,  # embossing
-                    3,  # filter_size
-                    -15,  # frame_near
-                ],
             ],
             inputs=inputs,
             outputs=outputs,
