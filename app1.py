@@ -234,7 +234,6 @@ def run_demo_server(pipe):
             inputs=[],
             outputs=blocks_settings + [
                 submit_btn,
-                submit_3d,
                 input_image,
                 input_output_16bit,
                 input_output_fp32,
