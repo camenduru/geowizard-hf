@@ -57,7 +57,7 @@ def process(
     path_out_vis = os.path.join(path_output_dir, f"{name_base}_depth_colored.png")
 
     np.save(path_out_fp32, depth_pred)
-    Image.fromarray(normal_out_vis).save(normal_out_vis)
+    normal_colored.save(normal_out_vis)
     depth_colored.save(path_out_vis)
 
     return (
