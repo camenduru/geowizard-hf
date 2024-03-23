@@ -79,7 +79,7 @@ def run_demo():
     _DESCRIPTION = '''
     <div>
     Generate consistent depth and normal from single image.
-    <a style="display:inline-block; margin-left: .5em" href='https://github.com/xxlong0/Wonder3D/'><img src='https://img.shields.io/github/stars/xxlong0/Wonder3D?style=social' /></a>
+    <a style="display:inline-block; margin-left: .5em" href='https://github.com/uxiao0719/GeoWizard/'><img src='https://img.shields.io/github/stars/uxiao0719/GeoWizard?style=social' /></a>
     </div>
     '''
     _GPU_ID = 0
@@ -106,7 +106,7 @@ def run_demo():
             with gr.Column(scale=1):
 
                 with gr.Accordion('Advanced options', open=True):
-                    with gr.Row():
+                    with gr.Column():
                         
                         domain = gr.Radio(
                          [
@@ -149,9 +149,9 @@ def run_demo():
                     
 
                 run_btn = gr.Button('Generate', variant='primary', interactive=True)
-        with gr.Row():
+        with gr.Column():
             depth = gr.Image(interactive=False, height=384, show_label=False)
-        with gr.Row():
+        with gr.Column():
             normal = gr.Image(interactive=False, height=384, show_label=False)
 
 
