@@ -31,6 +31,7 @@ import sys
 sys.path.append("../")
 from models.depth_normal_pipeline_clip import DepthNormalEstimationPipeline
 #from models.depth_normal_pipeline_clip_cfg import DepthNormalEstimationPipeline
+from models.depth_normal_pipeline_clip_cfg1 import DepthNormalEstimationPipeline
 from utils.seed_all import seed_all
 import matplotlib.pyplot as plt
 from utils.de_normalized import align_scale_shift
@@ -54,8 +55,8 @@ sd_image_variations_diffusers_path = '.'
 image_encoder = CLIPVisionModelWithProjection.from_pretrained(sd_image_variations_diffusers_path, subfolder="image_encoder")
 feature_extractor = CLIPImageProcessor.from_pretrained(sd_image_variations_diffusers_path, subfolder="feature_extractor")
 
-unet = UNet2DConditionModel.from_pretrained('./wocfg/unet_ema')
-#unet = UNet2DConditionModel.from_pretrained('./cfg/unet_ema')
+#unet = UNet2DConditionModel.from_pretrained('./wocfg/unet_ema')
+unet = UNet2DConditionModel.from_pretrained('./cfg/unet_ema')
 
 pipe = DepthNormalEstimationPipeline(vae=vae,
                             image_encoder=image_encoder,
@@ -77,7 +78,7 @@ def depth_normal(img,
                 denoising_steps,
                 ensemble_size,
                 processing_res,
-                #guidance_scale,
+                guidance_scale,
                 domain):
 
     #img = img.resize((processing_res, processing_res), Image.Resampling.LANCZOS)
@@ -87,7 +88,7 @@ def depth_normal(img,
         ensemble_size=ensemble_size,
         processing_res=processing_res,
         batch_size=0,
-        #guidance_scale=guidance_scale,
+        guidance_scale=guidance_scale,
         domain=domain,
         show_progress_bar=True,
     )
@@ -151,13 +152,13 @@ def run_demo():
                          label="Data Type (Must Select One matches your image)",
                          value="indoor",
                      )
-                     #    guidance_scale = gr.Slider(
-                     #     label="Classifier Free Guidance Scale",
-                     #     minimum=1,
-                     #     maximum=5,
-                     #     step=1,
-                     #     value=1,
-                     # )
+                        guidance_scale = gr.Slider(
+                         label="Classifier Free Guidance Scale",
+                         minimum=1,
+                         maximum=5,
+                         step=1,
+                         value=1,
+                     )
                         denoising_steps = gr.Slider(
                          label="Number of denoising steps (More stepes, better quality)",
                          minimum=1,
@@ -194,7 +195,7 @@ def run_demo():
                         inputs=[input_image, denoising_steps,
                                 ensemble_size,
                                 processing_res,
-                                #guidance_scale,
+                                guidance_scale,
                                 domain],
                         outputs=[depth, normal]
                         )
