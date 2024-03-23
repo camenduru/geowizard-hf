@@ -76,11 +76,11 @@ def run_demo():
         text-align: center; /* Horizontally center the content */
     }'''
 
-    _TITLE = '''GeoWizard'''
+    _TITLE = '''GeoWizard: Unleashing the Diffusion Priors for 3D Geometry Estimation from a Single Image'''
     _DESCRIPTION = '''
     <div>
-    Generate consistent depth and normal from single image.
-    <a style="display:inline-block; margin-left: .5em" href='https://github.com/uxiao0719/GeoWizard/'><img src='https://img.shields.io/github/stars/uxiao0719/GeoWizard?style=social' /></a>
+    Generate consistent depth and normal from single image. High quality and rich details.
+    <a style="display:inline-block; margin-left: .5em" href='https://github.com/fuxiao0719/GeoWizard/'><img src='https://img.shields.io/github/stars/fuxiao0719/GeoWizard?style=social' /></a>
     </div>
     '''
     _GPU_ID = 0
@@ -115,7 +115,7 @@ def run_demo():
                              ("Indoor", "indoor"),
                              ("Object", "object"),
                          ],
-                         label="Data Domain",
+                         label="Data Type (Must Select One matches your image)",
                          value="indoor",
                      )
                         guidance_scale = gr.Slider(
@@ -126,14 +126,14 @@ def run_demo():
                          value=3,
                      )
                         denoising_steps = gr.Slider(
-                         label="Number of denoising steps",
+                         label="Number of denoising steps (More stepes, better quality)",
                          minimum=1,
-                         maximum=20,
+                         maximum=50,
                          step=1,
-                         value=10,
+                         value=20,
                      )
                         ensemble_size = gr.Slider(
-                         label="Ensemble size",
+                         label="Ensemble size (1 will be enough. More steps, higher accuracy)",
                          minimum=1,
                          maximum=15,
                          step=1,
