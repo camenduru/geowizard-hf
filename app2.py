@@ -45,7 +45,22 @@ import torchvision.transforms.functional as TF
 from torchvision.transforms import InterpolationMode
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")  
-pipe = DepthNormalEstimationPipeline.from_pretrained(CHECKPOINT)
+#pipe = DepthNormalEstimationPipeline.from_pretrained(CHECKPOINT)
+
+stable_diffusion_repo_path = '.'
+vae = AutoencoderKL.from_pretrained(stable_diffusion_repo_path, subfolder='vae')
+scheduler = DDIMScheduler.from_pretrained(stable_diffusion_repo_path, subfolder='scheduler')
+sd_image_variations_diffusers_path = '.'
+image_encoder = CLIPVisionModelWithProjection.from_pretrained(sd_image_variations_diffusers_path, subfolder="image_encoder")
+feature_extractor = CLIPImageProcessor.from_pretrained(sd_image_variations_diffusers_path, subfolder="feature_extractor")
+
+unet = UNet2DConditionModel.from_pretrained('tbd')
+
+pipe = DepthNormalEstimationPipeline(vae=vae,
+                            image_encoder=image_encoder,
+                            feature_extractor=feature_extractor,
+                            unet=unet,
+                            scheduler=scheduler)
     
 try:
     import xformers
@@ -61,7 +76,7 @@ def depth_normal(img,
                 denoising_steps,
                 ensemble_size,
                 processing_res,
-                guidance_scale,
+                #guidance_scale,
                 domain):
 
     #img = img.resize((processing_res, processing_res), Image.Resampling.LANCZOS)
@@ -71,7 +86,7 @@ def depth_normal(img,
         ensemble_size=ensemble_size,
         processing_res=processing_res,
         batch_size=0,
-        guidance_scale=guidance_scale,
+        #guidance_scale=guidance_scale,
         domain=domain,
         show_progress_bar=True,
     )
@@ -135,13 +150,13 @@ def run_demo():
                          label="Data Type (Must Select One matches your image)",
                          value="indoor",
                      )
-                        guidance_scale = gr.Slider(
-                         label="Classifier Free Guidance Scale",
-                         minimum=1,
-                         maximum=5,
-                         step=1,
-                         value=3,
-                     )
+                     #    guidance_scale = gr.Slider(
+                     #     label="Classifier Free Guidance Scale",
+                     #     minimum=1,
+                     #     maximum=5,
+                     #     step=1,
+                     #     value=3,
+                     # )
                         denoising_steps = gr.Slider(
                          label="Number of denoising steps (More stepes, better quality)",
                          minimum=1,
@@ -178,7 +193,7 @@ def run_demo():
                         inputs=[input_image, denoising_steps,
                                 ensemble_size,
                                 processing_res,
-                                guidance_scale,
+                                #guidance_scale,
                                 domain],
                         outputs=[depth, normal]
                         )
