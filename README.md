@@ -1,11 +1,11 @@
 ---
 title: Geowizard
-emoji: 🦀
-colorFrom: purple
-colorTo: gray
+emoji: 🐨
+colorFrom: green
+colorTo: indigo
 sdk: gradio
 sdk_version: 4.11.0
-app_file: app1.py
+app_file: app2.py
 pinned: false
 ---
 
