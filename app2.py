@@ -29,7 +29,8 @@ import cv2
 
 import sys
 sys.path.append("../")
-from models.depth_normal_pipeline_clip import DepthNormalEstimationPipeline
+#from models.depth_normal_pipeline_clip import DepthNormalEstimationPipeline
+from models.depth_normal_pipeline_clip_cfg import DepthNormalEstimationPipeline
 from utils.seed_all import seed_all
 import matplotlib.pyplot as plt
 from utils.de_normalized import align_scale_shift
@@ -85,7 +86,7 @@ def depth_normal(img,
         ensemble_size=ensemble_size,
         processing_res=processing_res,
         batch_size=0,
-        #guidance_scale=guidance_scale,
+        guidance_scale=guidance_scale,
         domain=domain,
         show_progress_bar=True,
     )
