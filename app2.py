@@ -78,6 +78,7 @@ except:
     pass  # run without xformers
 
 pipe = pipe.to(device)
+pipe_cfg = pipe_cfg.to(device)
 #run_demo_server(pipe)
 
 @spaces.GPU
