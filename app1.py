@@ -91,7 +91,7 @@ def run_demo():
         gr.Markdown(_DESCRIPTION)
         with gr.Row(variant='panel'):
             with gr.Column(scale=1):
-                input_image = gr.Image(type='pil', image_mode='RGBA', height=320, label='Input image', tool=None)
+                input_image = gr.Image(type='pil', image_mode='RGBA', height=320, label='Input image')
 
                 example_folder = os.path.join(os.path.dirname(__file__), "./files")
                 example_fns = [os.path.join(example_folder, example) for example in os.listdir(example_folder)]
