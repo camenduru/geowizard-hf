@@ -46,7 +46,8 @@ def depth_normal(img,
                 processing_res,
                 guidance_scale,
                 domain):
-    img = img.resize((processing_res, processing_res), Image.Resampling.LANCZOS)
+
+    #img = img.resize((processing_res, processing_res), Image.Resampling.LANCZOS)
     pipe_out = pipe(
         img,
         denoising_steps=denoising_steps,
