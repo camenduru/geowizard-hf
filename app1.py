@@ -149,10 +149,11 @@ def run_demo():
                     
 
                 run_btn = gr.Button('Generate', variant='primary', interactive=True)
-        with gr.Column():
-            depth = gr.Image(interactive=False, height=384, show_label=False)
-        with gr.Column():
-            normal = gr.Image(interactive=False, height=384, show_label=False)
+        with gr.Row():
+            with gr.Column():
+                depth = gr.Image(interactive=False, height=384, show_label=False)
+            with gr.Column():
+                normal = gr.Image(interactive=False, height=384, show_label=False)
 
 
         run_btn.click(fn=depth_normal, 
