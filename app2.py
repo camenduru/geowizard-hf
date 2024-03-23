@@ -175,14 +175,14 @@ def run_demo():
                          value="indoor",
                      )
                         guidance_scale = gr.Slider(
-                         label="Classifier Free Guidance Scale, 0 for without guidance",
+                         label="Classifier Free Guidance Scale, 0 Recommended for no guidance",
                          minimum=0,
                          maximum=5,
                          step=1,
                          value=0,
                      )
                         denoising_steps = gr.Slider(
-                         label="Number of denoising steps (More stepes, better quality)",
+                         label="Number of denoising steps (More steps, better quality)",
                          minimum=1,
                          maximum=50,
                          step=1,
@@ -193,7 +193,7 @@ def run_demo():
                          minimum=1,
                          maximum=15,
                          step=1,
-                         value=2,
+                         value=1,
                      )
                         processing_res = gr.Radio(
                          [
