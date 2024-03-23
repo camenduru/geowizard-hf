@@ -124,7 +124,7 @@ def run_demo():
                          step=1,
                          value=3,
                      )
-                        denoise_steps = gr.Slider(
+                        denoising_steps = gr.Slider(
                          label="Number of denoising steps",
                          minimum=1,
                          maximum=20,
