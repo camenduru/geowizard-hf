@@ -148,6 +148,7 @@ class DepthNormalEstimationPipeline(DiffusionPipeline):
                 input_rgb=batched_image,
                 num_inference_steps=denoising_steps,
                 domain=domain,
+                guidance_scale=guidance_scale
                 show_pbar=show_progress_bar,
             )
             depth_pred_ls.append(depth_pred_raw.detach().clone())
@@ -231,6 +232,7 @@ class DepthNormalEstimationPipeline(DiffusionPipeline):
     def single_infer(self,input_rgb:torch.Tensor,
                      num_inference_steps:int,
                      domain:str,
+                     guidance_scale: int
                      show_pbar:bool,):
 
         device = input_rgb.device
