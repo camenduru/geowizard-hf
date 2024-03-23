@@ -75,6 +75,15 @@ def run_demo():
         text-align: center; /* Horizontally center the content */
     }'''
 
+    _TITLE = '''GeoWizard'''
+    _DESCRIPTION = '''
+    <div>
+    Generate consistent depth and normal from single image.
+    <a style="display:inline-block; margin-left: .5em" href='https://github.com/xxlong0/Wonder3D/'><img src='https://img.shields.io/github/stars/xxlong0/Wonder3D?style=social' /></a>
+    </div>
+    '''
+    _GPU_ID = 0
+
     with gr.Blocks(title=_TITLE, theme=custom_theme, css=custom_css) as demo:
         with gr.Row():
             with gr.Column(scale=1):
