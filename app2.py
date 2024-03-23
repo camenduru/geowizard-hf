@@ -31,7 +31,7 @@ import sys
 sys.path.append("../")
 from models.depth_normal_pipeline_clip import DepthNormalEstimationPipeline
 #from models.depth_normal_pipeline_clip_cfg import DepthNormalEstimationPipeline
-#from models.depth_normal_pipeline_clip_cfg1 import DepthNormalEstimationPipeline
+from models.depth_normal_pipeline_clip_cfg_1 import DepthNormalEstimationPipeline as DepthNormalEstimationPipelineCFG
 from utils.seed_all import seed_all
 import matplotlib.pyplot as plt
 from utils.de_normalized import align_scale_shift
@@ -56,13 +56,20 @@ image_encoder = CLIPVisionModelWithProjection.from_pretrained(sd_image_variation
 feature_extractor = CLIPImageProcessor.from_pretrained(sd_image_variations_diffusers_path, subfolder="feature_extractor")
 
 unet = UNet2DConditionModel.from_pretrained('./wocfg/unet_ema')
-#unet = UNet2DConditionModel.from_pretrained('./cfg/unet_ema')
+unet_cfg = UNet2DConditionModel.from_pretrained('./cfg/unet_ema')
 
 pipe = DepthNormalEstimationPipeline(vae=vae,
                             image_encoder=image_encoder,
                             feature_extractor=feature_extractor,
                             unet=unet,
                             scheduler=scheduler)
+
+pipe_cfg = DepthNormalEstimationPipelineCFG(vae=vae,
+                            image_encoder=image_encoder,
+                            feature_extractor=feature_extractor,
+                            unet=unet_cfg,
+                            scheduler=scheduler)
+
     
 try:
     import xformers
@@ -78,20 +85,34 @@ def depth_normal(img,
                 denoising_steps,
                 ensemble_size,
                 processing_res,
-                #guidance_scale,
+                guidance_scale,
                 domain):
 
     #img = img.resize((processing_res, processing_res), Image.Resampling.LANCZOS)
-    pipe_out = pipe(
-        img,
-        denoising_steps=denoising_steps,
-        ensemble_size=ensemble_size,
-        processing_res=processing_res,
-        batch_size=0,
-        #guidance_scale=guidance_scale,
-        domain=domain,
-        show_progress_bar=True,
-    )
+
+    if guidance_scale > 0:
+        pipe_out = pipe_cfg(
+            img,
+            denoising_steps=denoising_steps,
+            ensemble_size=ensemble_size,
+            processing_res=processing_res,
+            batch_size=0,
+            guidance_scale=guidance_scale,
+            domain=domain,
+            show_progress_bar=True,
+        )
+                    
+    else:
+        pipe_out = pipe(
+            img,
+            denoising_steps=denoising_steps,
+            ensemble_size=ensemble_size,
+            processing_res=processing_res,
+            batch_size=0,
+            #guidance_scale=guidance_scale,
+            domain=domain,
+            show_progress_bar=True,
+        )
 
     depth_colored = pipe_out.depth_colored
     normal_colored = pipe_out.normal_colored
@@ -152,13 +173,13 @@ def run_demo():
                          label="Data Type (Must Select One matches your image)",
                          value="indoor",
                      )
-                     #    guidance_scale = gr.Slider(
-                     #     label="Classifier Free Guidance Scale",
-                     #     minimum=1,
-                     #     maximum=5,
-                     #     step=1,
-                     #     value=1,
-                     # )
+                        guidance_scale = gr.Slider(
+                         label="Classifier Free Guidance Scale, 0 for without guidance",
+                         minimum=0,
+                         maximum=5,
+                         step=1,
+                         value=0,
+                     )
                         denoising_steps = gr.Slider(
                          label="Number of denoising steps (More stepes, better quality)",
                          minimum=1,
@@ -195,7 +216,7 @@ def run_demo():
                         inputs=[input_image, denoising_steps,
                                 ensemble_size,
                                 processing_res,
-                                #guidance_scale,
+                                guidance_scale,
                                 domain],
                         outputs=[depth, normal]
                         )
