@@ -75,7 +75,7 @@ def depth_normal(img,
                 denoising_steps,
                 ensemble_size,
                 processing_res,
-                #guidance_scale,
+                guidance_scale,
                 domain):
 
     #img = img.resize((processing_res, processing_res), Image.Resampling.LANCZOS)
@@ -149,13 +149,13 @@ def run_demo():
                          label="Data Type (Must Select One matches your image)",
                          value="indoor",
                      )
-                     #    guidance_scale = gr.Slider(
-                     #     label="Classifier Free Guidance Scale",
-                     #     minimum=1,
-                     #     maximum=5,
-                     #     step=1,
-                     #     value=3,
-                     # )
+                        guidance_scale = gr.Slider(
+                         label="Classifier Free Guidance Scale",
+                         minimum=1,
+                         maximum=5,
+                         step=1,
+                         value=3,
+                     )
                         denoising_steps = gr.Slider(
                          label="Number of denoising steps (More stepes, better quality)",
                          minimum=1,
@@ -192,7 +192,7 @@ def run_demo():
                         inputs=[input_image, denoising_steps,
                                 ensemble_size,
                                 processing_res,
-                                #guidance_scale,
+                                guidance_scale,
                                 domain],
                         outputs=[depth, normal]
                         )
