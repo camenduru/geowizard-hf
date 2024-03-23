@@ -73,12 +73,13 @@ class DepthNormalEstimationPipeline(DiffusionPipeline):
     @torch.no_grad()
     def __call__(self,
                  input_image:Image,
-                 denosing_steps: int = 10,
+                 denoising_steps: int = 10,
                  ensemble_size: int = 10,
                  processing_res: int = 768,
                  match_input_res:bool =True,
                  batch_size:int = 0,
                  domain: str = "indoor",
+                 guidance_scale: int = 3,
                  color_map: str="Spectral",
                  show_progress_bar:bool = True,
                  ensemble_kwargs: Dict = None,
@@ -95,7 +96,7 @@ class DepthNormalEstimationPipeline(DiffusionPipeline):
             )," Value Error: `resize_output_back` is only valid with "
         
         assert processing_res >=0
-        assert denosing_steps >=1
+        assert denoising_steps >=1
         assert ensemble_size >=1
 
         # --------------- Image Processing ------------------------
@@ -145,8 +146,9 @@ class DepthNormalEstimationPipeline(DiffusionPipeline):
 
             depth_pred_raw, normal_pred_raw = self.single_infer(
                 input_rgb=batched_image,
-                num_inference_steps=denosing_steps,
+                num_inference_steps=denoising_steps,
                 domain=domain,
+                guidance_scale=guidance_scale，
                 show_pbar=show_progress_bar,
             )
             depth_pred_ls.append(depth_pred_raw.detach().clone())
@@ -230,6 +232,7 @@ class DepthNormalEstimationPipeline(DiffusionPipeline):
     def single_infer(self,input_rgb:torch.Tensor,
                      num_inference_steps:int,
                      domain:str,
+                     guidance_scale:int,
                      show_pbar:bool,):
 
         device = input_rgb.device
@@ -286,7 +289,7 @@ class DepthNormalEstimationPipeline(DiffusionPipeline):
             # predict the noise residual
             noise_pred = self.unet(unet_input, t.repeat(4), encoder_hidden_states=batch_img_embed, class_labels=class_embedding.repeat(2,1)).sample  
             noise_pred_uncond, noise_pred_cond = noise_pred.chunk(2)
-            guidance_scale = 1.
+            guidance_scale = guidance_scale
             noise_pred = noise_pred_uncond + guidance_scale * (noise_pred_cond - noise_pred_uncond)
         
             # compute the previous noisy sample x_t -> x_t-1
