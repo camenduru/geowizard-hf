@@ -13,6 +13,8 @@ from gradio_imageslider import ImageSlider
 
 import spaces
 
+import fire
+
 REPO_URL = "https://github.com/lemonaddie/geowizard.git"
 CHECKPOINT = "lemonaddie/Geowizard"
 REPO_DIR = "geowizard"
