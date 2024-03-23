@@ -155,7 +155,7 @@ def run_demo():
             normal = gr.Image(interactive=False, height=384, show_label=False)
 
 
-        run_btn.click(fn=partial(depth_normal), 
+        run_btn.click(fn=depth_normal, 
                         inputs=[input_image, denoising_steps,
                                 ensemble_size,
                                 processing_res,
