@@ -31,7 +31,7 @@ import sys
 sys.path.append("../")
 from models.depth_normal_pipeline_clip import DepthNormalEstimationPipeline
 #from models.depth_normal_pipeline_clip_cfg import DepthNormalEstimationPipeline
-from models.depth_normal_pipeline_clip_cfg_1 import DepthNormalEstimationPipeline as DepthNormalEstimationPipelineCFG
+#from models.depth_normal_pipeline_clip_cfg_1 import DepthNormalEstimationPipeline as DepthNormalEstimationPipelineCFG
 from utils.seed_all import seed_all
 import matplotlib.pyplot as plt
 from utils.de_normalized import align_scale_shift
@@ -64,11 +64,11 @@ pipe = DepthNormalEstimationPipeline(vae=vae,
                             unet=unet,
                             scheduler=scheduler)
 
-pipe_cfg = DepthNormalEstimationPipelineCFG(vae=vae,
-                            image_encoder=image_encoder,
-                            feature_extractor=feature_extractor,
-                            unet=unet_cfg,
-                            scheduler=scheduler)
+# pipe_cfg = DepthNormalEstimationPipelineCFG(vae=vae,
+#                             image_encoder=image_encoder,
+#                             feature_extractor=feature_extractor,
+#                             unet=unet_cfg,
+#                             scheduler=scheduler)
 
     
 try:
@@ -78,7 +78,7 @@ except:
     pass  # run without xformers
 
 pipe = pipe.to(device)
-pipe_cfg = pipe_cfg.to(device)
+#pipe_cfg = pipe_cfg.to(device)
 #run_demo_server(pipe)
 
 @spaces.GPU
