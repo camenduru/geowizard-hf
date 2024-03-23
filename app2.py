@@ -54,7 +54,8 @@ sd_image_variations_diffusers_path = '.'
 image_encoder = CLIPVisionModelWithProjection.from_pretrained(sd_image_variations_diffusers_path, subfolder="image_encoder")
 feature_extractor = CLIPImageProcessor.from_pretrained(sd_image_variations_diffusers_path, subfolder="feature_extractor")
 
-unet = UNet2DConditionModel.from_pretrained('./wocfg/unet_ema')
+#unet = UNet2DConditionModel.from_pretrained('./wocfg/unet_ema')
+unet = UNet2DConditionModel.from_pretrained('./cfg/unet_ema')
 
 pipe = DepthNormalEstimationPipeline(vae=vae,
                             image_encoder=image_encoder,
