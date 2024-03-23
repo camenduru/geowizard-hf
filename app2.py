@@ -155,21 +155,21 @@ def run_demo():
                          minimum=1,
                          maximum=5,
                          step=1,
-                         value=3,
+                         value=1,
                      )
                         denoising_steps = gr.Slider(
                          label="Number of denoising steps (More stepes, better quality)",
                          minimum=1,
                          maximum=50,
                          step=1,
-                         value=20,
+                         value=10,
                      )
                         ensemble_size = gr.Slider(
                          label="Ensemble size (1 will be enough. More steps, higher accuracy)",
                          minimum=1,
                          maximum=15,
                          step=1,
-                         value=1,
+                         value=2,
                      )
                         processing_res = gr.Radio(
                          [
