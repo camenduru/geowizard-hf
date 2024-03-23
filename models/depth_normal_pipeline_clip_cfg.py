@@ -232,7 +232,7 @@ class DepthNormalEstimationPipeline(DiffusionPipeline):
     def single_infer(self,input_rgb:torch.Tensor,
                      num_inference_steps:int,
                      domain:str,
-                     guidance_scale: int
+                     guidance_scale: int,
                      show_pbar:bool,):
 
         device = input_rgb.device
