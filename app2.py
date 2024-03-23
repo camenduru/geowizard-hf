@@ -32,7 +32,6 @@ sys.path.append("../")
 from models.depth_normal_pipeline_clip import DepthNormalEstimationPipeline
 from utils.seed_all import seed_all
 import matplotlib.pyplot as plt
-from dataloader.file_io import read_hdf5, align_normal, creat_uv_mesh
 from utils.de_normalized import align_scale_shift
 from utils.depth2normal import *
 
