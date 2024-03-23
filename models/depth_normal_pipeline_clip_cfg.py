@@ -75,6 +75,7 @@ class DepthNormalEstimationPipeline(DiffusionPipeline):
                  input_image:Image,
                  denosing_steps: int = 10,
                  ensemble_size: int = 10,
+                 guidance_scale: int = 1,
                  processing_res: int = 768,
                  match_input_res:bool =True,
                  batch_size:int = 0,
@@ -286,7 +287,8 @@ class DepthNormalEstimationPipeline(DiffusionPipeline):
             # predict the noise residual
             noise_pred = self.unet(unet_input, t.repeat(4), encoder_hidden_states=batch_img_embed, class_labels=class_embedding.repeat(2,1)).sample  
             noise_pred_uncond, noise_pred_cond = noise_pred.chunk(2)
-            guidance_scale = 3.
+            #guidance_scale = 3.
+            guidance_scale = guidance_scale
             noise_pred = noise_pred_uncond + guidance_scale * (noise_pred_cond - noise_pred_uncond)
         
             # compute the previous noisy sample x_t -> x_t-1
