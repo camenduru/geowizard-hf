@@ -87,7 +87,11 @@ def depth_normal(img,
                 ensemble_size,
                 processing_res,
                 #guidance_scale,
+                seed,
                 domain):
+
+    seed = int(seed)
+    torch.manual_seed(seed)
 
     #img = img.resize((processing_res, processing_res), Image.Resampling.LANCZOS)
 
@@ -195,6 +199,8 @@ def run_demo():
                          step=1,
                          value=1,
                      )
+                        seed = gr.Number(42, label='Seed. May try different seed for better results.')
+                        
                         processing_res = gr.Radio(
                          [
                              ("Native", 0),
@@ -218,6 +224,7 @@ def run_demo():
                                 ensemble_size,
                                 processing_res,
                                 #guidance_scale,
+                                seed,
                                 domain],
                         outputs=[depth, normal]
                         )
