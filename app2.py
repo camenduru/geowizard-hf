@@ -45,14 +45,12 @@ from torchvision.transforms import InterpolationMode
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")  
 
-stable_diffusion_repo_path = '.'
-vae = AutoencoderKL.from_pretrained(stable_diffusion_repo_path, subfolder='vae')
-scheduler = DDIMScheduler.from_pretrained(stable_diffusion_repo_path, subfolder='scheduler')
-sd_image_variations_diffusers_path = '.'
-image_encoder = CLIPVisionModelWithProjection.from_pretrained(sd_image_variations_diffusers_path, subfolder="image_encoder")
-feature_extractor = CLIPImageProcessor.from_pretrained(sd_image_variations_diffusers_path, subfolder="feature_extractor")
+vae = AutoencoderKL.from_pretrained('.', subfolder='vae')
+scheduler = DDIMScheduler.from_pretrained('.', subfolder='scheduler')
+image_encoder = CLIPVisionModelWithProjection.from_pretrained('.', subfolder="image_encoder")
+feature_extractor = CLIPImageProcessor.from_pretrained('.', subfolder="feature_extractor")
 
-unet = UNet2DConditionModel.from_pretrained('./wocfg/unet_ema')
+unet = UNet2DConditionModel.from_pretrained('./unet')
 
 pipe = DepthNormalEstimationPipeline(vae=vae,
                             image_encoder=image_encoder,
@@ -73,7 +71,6 @@ def depth_normal(img,
                 denoising_steps,
                 ensemble_size,
                 processing_res,
-                #guidance_scale,
                 seed,
                 domain):
 
@@ -86,7 +83,6 @@ def depth_normal(img,
         ensemble_size=ensemble_size,
         processing_res=processing_res,
         batch_size=0,
-        #guidance_scale=guidance_scale,
         domain=domain,
         show_progress_bar=True,
     )
@@ -131,7 +127,6 @@ def run_demo():
                 gr.Examples(
                     examples=example_fns,
                     inputs=[input_image],
-                    # outputs=[input_image],
                     cache_examples=False,
                     label='Examples (click one of the images below to start)',
                     examples_per_page=30
@@ -162,7 +157,7 @@ def run_demo():
                          minimum=1,
                          maximum=15,
                          step=1,
-                         value=1,
+                         value=4,
                      )
                         seed = gr.Number(42, label='Seed. May try different seed for better results.')
                         
@@ -188,7 +183,6 @@ def run_demo():
                         inputs=[input_image, denoising_steps,
                                 ensemble_size,
                                 processing_res,
-                                #guidance_scale,
                                 seed,
                                 domain],
                         outputs=[depth, normal]
