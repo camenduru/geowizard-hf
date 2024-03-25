@@ -45,10 +45,17 @@ from torchvision.transforms import InterpolationMode
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")  
 
-vae = AutoencoderKL.from_pretrained('.', subfolder='vae')
-scheduler = DDIMScheduler.from_pretrained('.', subfolder='scheduler')
-image_encoder = CLIPVisionModelWithProjection.from_pretrained('.', subfolder="image_encoder")
-feature_extractor = CLIPImageProcessor.from_pretrained('.', subfolder="feature_extractor")
+# vae = AutoencoderKL.from_pretrained('.', subfolder='vae')
+# scheduler = DDIMScheduler.from_pretrained('.', subfolder='scheduler')
+# image_encoder = CLIPVisionModelWithProjection.from_pretrained('.', subfolder="image_encoder")
+# feature_extractor = CLIPImageProcessor.from_pretrained('.', subfolder="feature_extractor")
+
+stable_diffusion_repo_path = "stabilityai/stable-diffusion-2-1-unclip"
+vae = AutoencoderKL.from_pretrained(stable_diffusion_repo_path, subfolder='vae')
+scheduler = DDIMScheduler.from_pretrained(stable_diffusion_repo_path, subfolder='scheduler')
+sd_image_variations_diffusers_path = 'lambdalabs/sd-image-variations-diffusers'
+image_encoder = CLIPVisionModelWithProjection.from_pretrained(sd_image_variations_diffusers_path, subfolder="image_encoder")
+feature_extractor = CLIPImageProcessor.from_pretrained(sd_image_variations_diffusers_path, subfolder="feature_extractor")
 unet = UNet2DConditionModel.from_pretrained('.', subfolder="unet7000")
 
 pipe = DepthNormalEstimationPipeline(vae=vae,
