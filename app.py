@@ -49,7 +49,7 @@ vae = AutoencoderKL.from_pretrained('.', subfolder='vae')
 scheduler = DDIMScheduler.from_pretrained('.', subfolder='scheduler')
 image_encoder = CLIPVisionModelWithProjection.from_pretrained('.', subfolder="image_encoder")
 feature_extractor = CLIPImageProcessor.from_pretrained('.', subfolder="feature_extractor")
-unet = UNet2DConditionModel.from_pretrained('.', subfolder="unet_7000")
+unet = UNet2DConditionModel.from_pretrained('.', subfolder="unet7000")
 
 pipe = DepthNormalEstimationPipeline(vae=vae,
                             image_encoder=image_encoder,
