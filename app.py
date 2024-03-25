@@ -159,7 +159,7 @@ def run_demo():
                          step=1,
                          value=4,
                      )
-                        seed = gr.Number(0, label='Seed. Negative values for not specifying seeds')
+                        seed = gr.Number(0, label='Random Seed. Negative values for not specifying')
                         
                         processing_res = gr.Radio(
                          [
