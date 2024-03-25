@@ -6,7 +6,7 @@ opencv-python == 4.5.5.62
 numpy == 1.23.1
 pillow==10.2.0
 h5py==3.1.0
-matplotlib==
+matplotlib==3.7.5
 scikit-image==0.22.0
 gradio==4.11.0
 gradio-imageslider==0.0.16
