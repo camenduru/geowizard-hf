@@ -81,7 +81,8 @@ def depth_normal(img,
                 domain):
 
     seed = int(seed)
-    #torch.manual_seed(seed)
+    if seed >= 0:
+        torch.manual_seed(seed)
 
     pipe_out = pipe(
         img,
@@ -90,7 +91,7 @@ def depth_normal(img,
         processing_res=processing_res,
         batch_size=0,
         domain=domain,
-        seed = seed,
+        #seed = seed,
         show_progress_bar=True,
     )
 
