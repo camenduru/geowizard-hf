@@ -74,7 +74,7 @@ def depth_normal(img,
                 domain):
 
     seed = int(seed)
-    torch.manual_seed(seed)
+    #torch.manual_seed(seed)
 
     pipe_out = pipe(
         img,
@@ -83,6 +83,7 @@ def depth_normal(img,
         processing_res=processing_res,
         batch_size=0,
         domain=domain,
+        seed = seed,
         show_progress_bar=True,
     )
 
@@ -158,7 +159,7 @@ def run_demo():
                          step=1,
                          value=4,
                      )
-                        seed = gr.Number(42, label='Seed. May try different seed for better results.')
+                        seed = gr.Number(0, label='Seed. Negative values for not specifying seeds')
                         
                         processing_res = gr.Radio(
                          [
