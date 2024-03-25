@@ -11,8 +11,6 @@ from PIL import Image
 
 from gradio_imageslider import ImageSlider
 
-import spaces
-
 import fire
 
 import argparse
@@ -67,7 +65,6 @@ except:
 
 pipe = pipe.to(device)
 
-@spaces.GPU
 def depth_normal(img,
                 denoising_steps,
                 ensemble_size,
