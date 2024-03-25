@@ -114,7 +114,7 @@ def run_demo():
     _TITLE = '''GeoWizard: Unleashing the Diffusion Priors for 3D Geometry Estimation from a Single Image'''
     _DESCRIPTION = '''
     <div>
-    Generate consistent depth and normal from single image. High quality and rich details.
+    Generate consistent depth and normal from single image. High quality and rich details. (PS: We find the demo running on ZeroGPU output slightly inferior results compared to A100 or 3060 with everything exactly the same.)
     <a style="display:inline-block; margin-left: .5em" href='https://github.com/fuxiao0719/GeoWizard/'><img src='https://img.shields.io/github/stars/fuxiao0719/GeoWizard?style=social' /></a>
     </div>
     '''
